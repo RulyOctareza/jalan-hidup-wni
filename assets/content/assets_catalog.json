@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "style": "flat_modern_indonesia",
+  "categories": {
+    "brand": [
+      {
+        "id": "app_icon",
+        "path": "assets/images/brand/app_icon.png",
+        "filename": "app_icon.png"
+      },
+      {
+        "id": "splash_bg",
+        "path": "assets/images/brand/splash_bg.png",
+        "filename": "splash_bg.png"
+      },
+      {
+        "id": "ui_news_banner",
+        "path": "assets/images/brand/ui_news_banner.png",
+        "filename": "ui_news_banner.png"
+      }
+    ],
+    "stats": [
+      {
+        "id": "stat_happiness",
+        "path": "assets/images/icons/stats/stat_happiness.png",
+        "filename": "stat_happiness.png"
+      },
+      {
+        "id": "stat_health",
+        "path": "assets/images/icons/stats/stat_health.png",
+        "filename": "stat_health.png"
+      },
+      {
+        "id": "stat_looks",
+        "path": "assets/images/icons/stats/stat_looks.png",
+        "filename": "stat_looks.png"
+      },
+      {
+        "id": "stat_reputation",
+        "path": "assets/images/icons/stats/stat_reputation.png",
+        "filename": "stat_reputation.png"
+      },
+      {
+        "id": "stat_smarts",
+        "path": "assets/images/icons/stats/stat_smarts.png",
+        "filename": "stat_smarts.png"
+      },
+      {
+        "id": "stat_wealth",
+        "path": "assets/images/icons/stats/stat_wealth.png",
+        "filename": "stat_wealth.png"
+      }
+    ],
+    "activities": [
+      {
+        "id": "activity_age_up",
+        "path": "assets/images/icons/activities/activity_age_up.png",
+        "filename": "activity_age_up.png"
+      },
+      {
+        "id": "activity_family",
+        "path": "assets/images/icons/activities/activity_family.png",
+        "filename": "activity_family.png"
+      },
+      {
+        "id": "activity_finance",
+        "path": "assets/images/icons/activities/activity_finance.png",
+        "filename": "activity_finance.png"
+      },
+      {
+        "id": "activity_health",
+        "path": "assets/images/icons/activities/activity_health.png",
+        "filename": "activity_health.png"
+      },
+      {
+        "id": "activity_housing",
+        "path": "assets/images/icons/activities/activity_housing.png",
+        "filename": "activity_housing.png"
+      },
+      {
+        "id": "activity_leisure",
+        "path": "assets/images/icons/activities/activity_leisure.png",
+        "filename": "activity_leisure.png"
+      },
+      {
+        "id": "activity_relationship",
+        "path": "assets/images/icons/activities/activity_relationship.png",
+        "filename": "activity_relationship.png"
+      },
+      {
+        "id": "activity_religion",
+        "path": "assets/images/icons/activities/activity_religion.png",
+        "filename": "activity_religion.png"
+      },
+      {
+        "id": "activity_school",
+        "path": "assets/images/icons/activities/activity_school.png",
+        "filename": "activity_school.png"
+      },
+      {
+        "id": "activity_shopping",
+        "path": "assets/images/icons/activities/activity_shopping.png",
+        "filename": "activity_shopping.png"
+      },
+      {
+        "id": "activity_social",
+        "path": "assets/images/icons/activities/activity_social.png",
+        "filename": "activity_social.png"
+      },
+      {
+        "id": "activity_travel",
+        "path": "assets/images/icons/activities/activity_travel.png",
+        "filename": "activity_travel.png"
+      },
+      {
+        "id": "activity_vehicle",
+        "path": "assets/images/icons/activities/activity_vehicle.png",
+        "filename": "activity_vehicle.png"
+      },
+      {
+        "id": "activity_work",
+        "path": "assets/images/icons/activities/activity_work.png",
+        "filename": "activity_work.png"
+      }
+    ],
+    "jobs": [
+      {
+        "id": "job_buruh",
+        "path": "assets/images/icons/jobs/job_buruh.png",
+        "filename": "job_buruh.png"
+      },
+      {
+        "id": "job_dokter",
+        "path": "assets/images/icons/jobs/job_dokter.png",
+        "filename": "job_dokter.png"
+      },
+      {
+        "id": "job_guru",
+        "path": "assets/images/icons/jobs/job_guru.png",
+        "filename": "job_guru.png"
+      },
+      {
+        "id": "job_influencer",
+        "path": "assets/images/icons/jobs/job_influencer.png",
+        "filename": "job_influencer.png"
+      },
+      {
+        "id": "job_mahasiswa",
+        "path": "assets/images/icons/jobs/job_mahasiswa.png",
+        "filename": "job_mahasiswa.png"
+      },
+      {
+        "id": "job_ojek",
+        "path": "assets/images/icons/jobs/job_ojek.png",
+        "filename": "job_ojek.png"
+      },
+      {
+        "id": "job_pedagang",
+        "path": "assets/images/icons/jobs/job_pedagang.png",
+        "filename": "job_pedagang.png"
+      },
+      {
+        "id": "job_petani",
+        "path": "assets/images/icons/jobs/job_petani.png",
+        "filename": "job_petani.png"
+      },
+      {
+        "id": "job_pns",
+        "path": "assets/images/icons/jobs/job_pns.png",
+        "filename": "job_pns.png"
+      },
+      {
+        "id": "job_programmer",
+        "path": "assets/images/icons/jobs/job_programmer.png",
+        "filename": "job_programmer.png"
+      },
+      {
+        "id": "job_tentara",
+        "path": "assets/images/icons/jobs/job_tentara.png",
+        "filename": "job_tentara.png"
+      },
+      {
+        "id": "job_umkm",
+        "path": "assets/images/icons/jobs/job_umkm.png",
+        "filename": "job_umkm.png"
+      }
+    ],
+    "life_phases": [
+      {
+        "id": "phase_critical",
+        "path": "assets/images/icons/phases/phase_critical.png",
+        "filename": "phase_critical.png"
+      },
+      {
+        "id": "phase_decline",
+        "path": "assets/images/icons/phases/phase_decline.png",
+        "filename": "phase_decline.png"
+      },
+      {
+        "id": "phase_innocence",
+        "path": "assets/images/icons/phases/phase_innocence.png",
+        "filename": "phase_innocence.png"
+      },
+      {
+        "id": "phase_near_death",
+        "path": "assets/images/icons/phases/phase_near_death.png",
+        "filename": "phase_near_death.png"
+      },
+      {
+        "id": "phase_recovery",
+        "path": "assets/images/icons/phases/phase_recovery.png",
+        "filename": "phase_recovery.png"
+      },
+      {
+        "id": "phase_rising",
+        "path": "assets/images/icons/phases/phase_rising.png",
+        "filename": "phase_rising.png"
+      },
+      {
+        "id": "phase_struggling",
+        "path": "assets/images/icons/phases/phase_struggling.png",
+        "filename": "phase_struggling.png"
+      },
+      {
+        "id": "phase_success",
+        "path": "assets/images/icons/phases/phase_success.png",
+        "filename": "phase_success.png"
+      },
+      {
+        "id": "phase_suffering",
+        "path": "assets/images/icons/phases/phase_suffering.png",
+        "filename": "phase_suffering.png"
+      },
+      {
+        "id": "phase_surviving",
+        "path": "assets/images/icons/phases/phase_surviving.png",
+        "filename": "phase_surviving.png"
+      }
+    ],
+    "achievements": [
+      {
+        "id": "achievement_covid_hero",
+        "path": "assets/images/icons/achievements/achievement_covid_hero.png",
+        "filename": "achievement_covid_hero.png"
+      },
+      {
+        "id": "achievement_keluarga",
+        "path": "assets/images/icons/achievements/achievement_keluarga.png",
+        "filename": "achievement_keluarga.png"
+      },
+      {
+        "id": "achievement_pengusaha",
+        "path": "assets/images/icons/achievements/achievement_pengusaha.png",
+        "filename": "achievement_pengusaha.png"
+      },
+      {
+        "id": "achievement_philanthropist",
+        "path": "assets/images/icons/achievements/achievement_philanthropist.png",
+        "filename": "achievement_philanthropist.png"
+      },
+      {
+        "id": "achievement_phoenix",
+        "path": "assets/images/icons/achievements/achievement_phoenix.png",
+        "filename": "achievement_phoenix.png"
+      },
+      {
+        "id": "achievement_pns",
+        "path": "assets/images/icons/achievements/achievement_pns.png",
+        "filename": "achievement_pns.png"
+      },
+      {
+        "id": "achievement_reformasi",
+        "path": "assets/images/icons/achievements/achievement_reformasi.png",
+        "filename": "achievement_reformasi.png"
+      },
+      {
+        "id": "achievement_survivor",
+        "path": "assets/images/icons/achievements/achievement_survivor.png",
+        "filename": "achievement_survivor.png"
+      }
+    ],
+    "history": [
+      {
+        "id": "history_digital",
+        "path": "assets/images/icons/history/history_digital.png",
+        "filename": "history_digital.png"
+      },
+      {
+        "id": "history_orde_baru",
+        "path": "assets/images/icons/history/history_orde_baru.png",
+        "filename": "history_orde_baru.png"
+      },
+      {
+        "id": "history_reformasi",
+        "path": "assets/images/icons/history/history_reformasi.png",
+        "filename": "history_reformasi.png"
+      }
+    ],
+    "avatars": [
+      {
+        "id": "avatar_adult_female",
+        "path": "assets/images/avatars/avatar_adult_female.png",
+        "filename": "avatar_adult_female.png"
+      },
+      {
+        "id": "avatar_adult_male",
+        "path": "assets/images/avatars/avatar_adult_male.png",
+        "filename": "avatar_adult_male.png"
+      },
+      {
+        "id": "avatar_child_female",
+        "path": "assets/images/avatars/avatar_child_female.png",
+        "filename": "avatar_child_female.png"
+      },
+      {
+        "id": "avatar_child_male",
+        "path": "assets/images/avatars/avatar_child_male.png",
+        "filename": "avatar_child_male.png"
+      },
+      {
+        "id": "avatar_elderly_female",
+        "path": "assets/images/avatars/avatar_elderly_female.png",
+        "filename": "avatar_elderly_female.png"
+      },
+      {
+        "id": "avatar_elderly_male",
+        "path": "assets/images/avatars/avatar_elderly_male.png",
+        "filename": "avatar_elderly_male.png"
+      },
+      {
+        "id": "avatar_teen_female",
+        "path": "assets/images/avatars/avatar_teen_female.png",
+        "filename": "avatar_teen_female.png"
+      },
+      {
+        "id": "avatar_teen_male",
+        "path": "assets/images/avatars/avatar_teen_male.png",
+        "filename": "avatar_teen_male.png"
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "bg_home_rural",
+        "path": "assets/images/backgrounds/bg_home_rural.png",
+        "filename": "bg_home_rural.png"
+      },
+      {
+        "id": "bg_home_urban",
+        "path": "assets/images/backgrounds/bg_home_urban.png",
+        "filename": "bg_home_urban.png"
+      },
+      {
+        "id": "bg_hospital",
+        "path": "assets/images/backgrounds/bg_hospital.png",
+        "filename": "bg_hospital.png"
+      },
+      {
+        "id": "bg_office",
+        "path": "assets/images/backgrounds/bg_office.png",
+        "filename": "bg_office.png"
+      },
+      {
+        "id": "bg_school",
+        "path": "assets/images/backgrounds/bg_school.png",
+        "filename": "bg_school.png"
+      }
+    ],
+    "events": [
+      {
+        "id": "event_bankruptcy",
+        "path": "assets/images/events/event_bankruptcy.png",
+        "filename": "event_bankruptcy.png"
+      },
+      {
+        "id": "event_bbm",
+        "path": "assets/images/events/event_bbm.png",
+        "filename": "event_bbm.png"
+      },
+      {
+        "id": "event_birth_child",
+        "path": "assets/images/events/event_birth_child.png",
+        "filename": "event_birth_child.png"
+      },
+      {
+        "id": "event_covid",
+        "path": "assets/images/events/event_covid.png",
+        "filename": "event_covid.png"
+      },
+      {
+        "id": "event_graduation",
+        "path": "assets/images/events/event_graduation.png",
+        "filename": "event_graduation.png"
+      },
+      {
+        "id": "event_krismon",
+        "path": "assets/images/events/event_krismon.png",
+        "filename": "event_krismon.png"
+      },
+      {
+        "id": "event_mudik",
+        "path": "assets/images/events/event_mudik.png",
+        "filename": "event_mudik.png"
+      },
+      {
+        "id": "event_near_death",
+        "path": "assets/images/events/event_near_death.png",
+        "filename": "event_near_death.png"
+      },
+      {
+        "id": "event_reformasi",
+        "path": "assets/images/events/event_reformasi.png",
+        "filename": "event_reformasi.png"
+      },
+      {
+        "id": "event_success",
+        "path": "assets/images/events/event_success.png",
+        "filename": "event_success.png"
+      },
+      {
+        "id": "event_wedding",
+        "path": "assets/images/events/event_wedding.png",
+        "filename": "event_wedding.png"
+      }
+    ]
+  },
+  "totalAssets": 80
+}

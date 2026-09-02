@@ -1,0 +1,113 @@
+[
+  {
+    "id": "study",
+    "name": "Belajar",
+    "icon": "school",
+    "energyCost": 1,
+    "minAge": 6,
+    "maxAge": 25,
+    "effects": { "smarts": 4, "happiness": -1 },
+    "logMessage": "Kamu belajar giat hari ini."
+  },
+  {
+    "id": "work",
+    "name": "Kerja",
+    "icon": "work",
+    "energyCost": 1,
+    "minAge": 17,
+    "effects": { "wealth": 1500000, "happiness": -2, "health": -1 },
+    "logMessage": "Seharian kerja. Capek tapi dapat gaji.",
+    "setsJob": "Karyawan"
+  },
+  {
+    "id": "gym",
+    "name": "Olahraga",
+    "icon": "health",
+    "energyCost": 1,
+    "minAge": 8,
+    "effects": { "health": 5, "looks": 2, "happiness": 1 },
+    "logMessage": "Kamu olahraga di lapangan/kompleks."
+  },
+  {
+    "id": "socialize",
+    "name": "Nongkrong",
+    "icon": "leisure",
+    "energyCost": 1,
+    "minAge": 10,
+    "effects": { "happiness": 6, "wealth": -50000 },
+    "logMessage": "Nongkrong sama teman. Asik!"
+  },
+  {
+    "id": "date",
+    "name": "Kencan",
+    "icon": "relationship",
+    "energyCost": 2,
+    "minAge": 14,
+    "effects": { "happiness": 10, "wealth": -200000, "looks": 1 },
+    "logMessage": "Kencan romantis hari ini."
+  },
+  {
+    "id": "shop",
+    "name": "Belanja",
+    "icon": "shopping",
+    "energyCost": 1,
+    "minAge": 12,
+    "effects": { "happiness": 5, "wealth": -300000 },
+    "logMessage": "Belanja di mall/pasar."
+  },
+  {
+    "id": "doctor",
+    "name": "Ke Dokter",
+    "icon": "health",
+    "energyCost": 2,
+    "minAge": 0,
+    "effects": { "health": 12, "wealth": -500000 },
+    "logMessage": "Cek kesehatan ke puskesmas/dokter."
+  },
+  {
+    "id": "side_hustle",
+    "name": "Side Hustle",
+    "icon": "finance",
+    "energyCost": 2,
+    "minAge": 15,
+    "effects": { "wealth": 800000, "happiness": -3, "health": -2 },
+    "logMessage": "Jualan online/ojek part-time."
+  },
+  {
+    "id": "family",
+    "name": "Waktu Keluarga",
+    "icon": "family",
+    "energyCost": 1,
+    "minAge": 5,
+    "effects": { "happiness": 8, "reputation": 2 },
+    "logMessage": "Quality time bareng keluarga."
+  },
+  {
+    "id": "religion",
+    "name": "Ibadah",
+    "icon": "religion",
+    "energyCost": 1,
+    "minAge": 7,
+    "effects": { "happiness": 4, "reputation": 3 },
+    "logMessage": "Beribadah dan muhasabah diri."
+  },
+  {
+    "id": "social_media",
+    "name": "Scroll Sosmed",
+    "icon": "social",
+    "energyCost": 1,
+    "minAge": 13,
+    "effects": { "happiness": 3, "smarts": -2, "health": -1 },
+    "logMessage": "Scroll TikTok/IG seharian."
+  },
+  {
+    "id": "rest",
+    "name": "Istirahat",
+    "icon": "leisure",
+    "energyCost": 0,
+    "minAge": 0,
+    "effects": { "health": 3, "happiness": 2 },
+    "logMessage": "Istirahat total seharian.",
+    "recoverEnergy": 1
+  }
+]

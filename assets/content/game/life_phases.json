@@ -1,0 +1,195 @@
+[
+  {
+    "id": "innocence",
+    "name": "Polos",
+    "nameEn": "innocence",
+    "description": "Masa kecil tanpa beban. Dunia terasa aman — atau setidaknya sederhana.",
+    "color": "#FFF8E1",
+    "overlay": null,
+    "musicMood": "warm",
+    "enterConditions": {
+      "ageMax": 7
+    },
+    "statTrendRequired": null,
+    "eventWeightNegative": 0.2,
+    "eventWeightPositive": 0.6,
+    "choiceImpactMultiplier": 0.8,
+    "badLuckMultiplier": 0.5,
+    "narrativeTone": "Kamu masih kecil. Dunia belum terlalu berat."
+  },
+  {
+    "id": "suffering",
+    "name": "Menderita",
+    "nameEn": "suffering",
+    "description": "Hidup terasa berat. Stats rendah, krisis personal atau nasional.",
+    "color": "#37474F",
+    "overlay": "rain",
+    "musicMood": "melancholy",
+    "enterConditions": {
+      "happinessMax": 25,
+      "healthMax": 20,
+      "orTriggers": ["national_disaster", "family_bankrupt", "orphaned"]
+    },
+    "statTrendRequired": "declining_2y",
+    "eventWeightNegative": 0.7,
+    "eventWeightPositive": 0.15,
+    "choiceImpactMultiplier": 1.5,
+    "badLuckMultiplier": 2.0,
+    "narrativeTone": "Hari-hari terasa panjang. Kamu bertanya: kapan ini selesai?"
+  },
+  {
+    "id": "struggling",
+    "name": "Berjuang",
+    "nameEn": "struggling",
+    "description": "Kamu aktif berusaha. Hasil belum datang, tapi kamu tidak menyerah.",
+    "color": "#FF6F00",
+    "overlay": "dusk",
+    "musicMood": "determined",
+    "enterConditions": {
+      "happinessMin": 20,
+      "happinessMax": 45,
+      "hasActiveGoal": true
+    },
+    "statTrendRequired": "mixed",
+    "eventWeightNegative": 0.45,
+    "eventWeightPositive": 0.35,
+    "choiceImpactMultiplier": 1.2,
+    "badLuckMultiplier": 1.3,
+    "narrativeTone": "Lembur, utang, dan harapan. Kamu masih jalan."
+  },
+  {
+    "id": "surviving",
+    "name": "Bertahan",
+    "nameEn": "surviving",
+    "description": "Tidak naik, tidak jatuh. Hidup hari demi hari.",
+    "color": "#78909C",
+    "overlay": null,
+    "musicMood": "neutral",
+    "enterConditions": {
+      "happinessMin": 35,
+      "happinessMax": 55,
+      "stagnantYearsMin": 3
+    },
+    "statTrendRequired": "flat_3y",
+    "eventWeightNegative": 0.35,
+    "eventWeightPositive": 0.35,
+    "choiceImpactMultiplier": 1.0,
+    "badLuckMultiplier": 1.0,
+    "narrativeTone": "Gaji pas-pasan. Weekend di rumah. Besok sama seperti kemarin."
+  },
+  {
+    "id": "rising",
+    "name": "Menuju Sukses",
+    "nameEn": "rising",
+    "description": "Trend naik. Peluang mulai datang. Harapan realistis.",
+    "color": "#FFB300",
+    "overlay": "sunrise",
+    "musicMood": "hopeful",
+    "enterConditions": {
+      "wealthTrend": "up_2y",
+      "happinessMin": 50
+    },
+    "statTrendRequired": "rising_2y",
+    "eventWeightNegative": 0.25,
+    "eventWeightPositive": 0.55,
+    "choiceImpactMultiplier": 1.1,
+    "badLuckMultiplier": 0.8,
+    "narrativeTone": "Usaha mulai membuahkan. Kamu bisa lihat cahaya di ujung."
+  },
+  {
+    "id": "success",
+    "name": "Sukses",
+    "nameEn": "success",
+    "description": "Puncak hidup — kekayaan, status, atau kebahagiaan keluarga.",
+    "color": "#FFD700",
+    "overlay": "golden",
+    "musicMood": "triumphant",
+    "enterConditions": {
+      "wealthPercentileMin": 80,
+      "orTriggers": ["famous", "high_status", "happy_family"]
+    },
+    "statTrendRequired": null,
+    "eventWeightNegative": 0.3,
+    "eventWeightPositive": 0.5,
+    "choiceImpactMultiplier": 0.9,
+    "badLuckMultiplier": 1.5,
+    "narrativeTone": "Kamu sudah sampai. Tapi puncak selalu goyah."
+  },
+  {
+    "id": "decline",
+    "name": "Turun",
+    "nameEn": "decline",
+    "description": "Jatuh dari puncak. Bangkrut, skandal, perceraian, atau kecanduan.",
+    "color": "#B71C1C",
+    "overlay": "storm",
+    "musicMood": "dark",
+    "enterConditions": {
+      "wealthTrend": "down_from_peak",
+      "orTriggers": ["bankrupt", "divorced", "scandal", "addiction"]
+    },
+    "statTrendRequired": "declining_from_success",
+    "eventWeightNegative": 0.65,
+    "eventWeightPositive": 0.1,
+    "choiceImpactMultiplier": 1.3,
+    "badLuckMultiplier": 1.8,
+    "narrativeTone": "Yang kamu bangun runtuh. Semua lihat kamu jatuh."
+  },
+  {
+    "id": "recovery",
+    "name": "Bangkit",
+    "nameEn": "recovery",
+    "description": "Comeback arc. Restart setelah jatuh.",
+    "color": "#FF8F00",
+    "overlay": "sunrise",
+    "musicMood": "redemption",
+    "enterConditions": {
+      "previousPhase": "decline",
+      "wealthTrend": "up_1y"
+    },
+    "statTrendRequired": "rising_from_decline",
+    "eventWeightNegative": 0.3,
+    "eventWeightPositive": 0.55,
+    "choiceImpactMultiplier": 1.4,
+    "badLuckMultiplier": 1.0,
+    "narrativeTone": "Kamu jatuh — tapi belum mati. Saatnya bangkit lagi."
+  },
+  {
+    "id": "near_death",
+    "name": "Mau Mati",
+    "nameEn": "near_death",
+    "description": "Kesehatan kritis atau usia lanjut. Refleksi hidup.",
+    "color": "#4A148C",
+    "overlay": "fade",
+    "musicMood": "reflective",
+    "enterConditions": {
+      "healthMax": 15,
+      "orAgeMin": 78,
+      "orTriggers": ["terminal_illness", "icu"]
+    },
+    "statTrendRequired": null,
+    "eventWeightNegative": 0.4,
+    "eventWeightPositive": 0.2,
+    "choiceImpactMultiplier": 2.0,
+    "badLuckMultiplier": 0.5,
+    "narrativeTone": "Waktu terasa tipis. Apa yang penting dari hidupmu?"
+  },
+  {
+    "id": "critical",
+    "name": "Titik Kritis",
+    "nameEn": "critical",
+    "description": "Momen keputusan yang mengubah hidup selamanya.",
+    "color": "#D50000",
+    "overlay": "flash",
+    "musicMood": "tension",
+    "enterConditions": {
+      "trigger": "critical_junction_active"
+    },
+    "statTrendRequired": null,
+    "eventWeightNegative": 0.5,
+    "eventWeightPositive": 0.5,
+    "choiceImpactMultiplier": 2.5,
+    "badLuckMultiplier": 1.0,
+    "narrativeTone": "Satu pilihan. Konsekuensi selamanya.",
+    "isTemporary": true
+  }
+]

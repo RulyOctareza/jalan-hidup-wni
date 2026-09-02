@@ -1,0 +1,101 @@
+[
+  {
+    "id": "orde_lama",
+    "name": "Orde Lama",
+    "startYear": 1945,
+    "endYear": 1965,
+    "generationLabel": "Generasi Revolusi",
+    "description": "Indonesia merdeka, konfrontasi, dan hyperinflation.",
+    "childhoodFlavor": "Main di gang sempit, mendengar radio siaran presiden.",
+    "economicModifier": -0.15,
+    "politicalStability": 0.3
+  },
+  {
+    "id": "transisi_65",
+    "name": "Transisi 1965",
+    "startYear": 1965,
+    "endYear": 1967,
+    "generationLabel": "Generasi Transisi",
+    "description": "Perubahan kekuasaan yang mengubah segalanya.",
+    "childhoodFlavor": "Orang tua bisu soal politik. Hati-hati di sekolah.",
+    "economicModifier": -0.2,
+    "politicalStability": 0.2
+  },
+  {
+    "id": "orde_baru_awal",
+    "name": "Orde Baru Awal",
+    "startYear": 1967,
+    "endYear": 1980,
+    "generationLabel": "Generasi Pembangunan",
+    "description": "Stabilitas dan pembangunan di bawah Suharto.",
+    "childhoodFlavor": "Pelajaran P4, disiplin, harapan jadi PNS.",
+    "economicModifier": 0.1,
+    "politicalStability": 0.75
+  },
+  {
+    "id": "orde_baru_puncak",
+    "name": "Orde Baru Puncak",
+    "startYear": 1981,
+    "endYear": 1996,
+    "generationLabel": "Generasi Prosperity",
+    "description": "Ekonomi tumbuh, TV masuk rumah, korupsi sistemik.",
+    "childhoodFlavor": "Sinetron, sepeda ontel, mimpi kuliah.",
+    "economicModifier": 0.2,
+    "politicalStability": 0.7
+  },
+  {
+    "id": "krismon",
+    "name": "Krismon & Reformasi",
+    "startYear": 1997,
+    "endYear": 1999,
+    "generationLabel": "Generasi Reformasi",
+    "description": "Krisis moneter, demo mahasiswa, Suharto mundur.",
+    "childhoodFlavor": "Ayah takut PHK. Harga naik. Berita demo di TV.",
+    "economicModifier": -0.35,
+    "politicalStability": 0.25
+  },
+  {
+    "id": "reformasi",
+    "name": "Era Reformasi",
+    "startYear": 1999,
+    "endYear": 2004,
+    "generationLabel": "Generasi Reformasi Muda",
+    "description": "Demokrasi coba-coba, recovery lambat.",
+    "childhoodFlavor": "Warnet, musik band, kebebasan baru.",
+    "economicModifier": -0.05,
+    "politicalStability": 0.5
+  },
+  {
+    "id": "sby",
+    "name": "Era SBY",
+    "startYear": 2004,
+    "endYear": 2014,
+    "generationLabel": "Generasi Millennial",
+    "description": "Stabilitas, media sosial, middle class tumbuh.",
+    "childhoodFlavor": "Facebook, BlackBerry, mall, UTBK.",
+    "economicModifier": 0.15,
+    "politicalStability": 0.8
+  },
+  {
+    "id": "jokowi",
+    "name": "Era Jokowi",
+    "startYear": 2014,
+    "endYear": 2024,
+    "generationLabel": "Generasi Digital",
+    "description": "Infrastruktur, ojek online, UMKM, polarisasi.",
+    "childhoodFlavor": "Smartphone, TikTok, GoFood, kuliah online saat COVID.",
+    "economicModifier": 0.1,
+    "politicalStability": 0.65
+  },
+  {
+    "id": "prabowo",
+    "name": "Era Baru",
+    "startYear": 2024,
+    "endYear": 2040,
+    "generationLabel": "Generasi Masa Depan",
+    "description": "Indonesia memasuki babak baru — player navigasi uncertainty.",
+    "childhoodFlavor": "AI, green economy, generasi yang belum ditulis sejarahnya.",
+    "economicModifier": 0.05,
+    "politicalStability": 0.6
+  }
+]

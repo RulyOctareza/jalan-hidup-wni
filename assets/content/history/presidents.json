@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sukarno",
+    "name": "Soekarno",
+    "startYear": 1945,
+    "endYear": 1967,
+    "eraId": "orde_lama",
+    "nickname": "Bung Karno",
+    "tone": "idealisme, revolusi, konfrontasi"
+  },
+  {
+    "id": "suharto",
+    "name": "Suharto",
+    "startYear": 1967,
+    "endYear": 1998,
+    "eraId": "orde_baru",
+    "nickname": "Pak Harto",
+    "tone": "pembangunan, stabilitas, otoriter"
+  },
+  {
+    "id": "habibie",
+    "name": "B.J. Habibie",
+    "startYear": 1998,
+    "endYear": 1999,
+    "eraId": "krismon",
+    "nickname": "Pak Habibie",
+    "tone": "transisi, reformasi, harapan"
+  },
+  {
+    "id": "gus_dur",
+    "name": "Abdurrahman Wahid",
+    "startYear": 1999,
+    "endYear": 2001,
+    "eraId": "reformasi",
+    "nickname": "Gus Dur",
+    "tone": "pluralisme, chaos kreatif"
+  },
+  {
+    "id": "megawati",
+    "name": "Megawati Soekarnoputri",
+    "startYear": 2001,
+    "endYear": 2004,
+    "eraId": "reformasi",
+    "nickname": "Ibu Mega",
+    "tone": "stabilisasi pasca reformasi"
+  },
+  {
+    "id": "sby",
+    "name": "Susilo Bambang Yudhoyono",
+    "startYear": 2004,
+    "endYear": 2014,
+    "eraId": "sby",
+    "nickname": "SBY",
+    "tone": "demokrasi stabil, modernisasi"
+  },
+  {
+    "id": "jokowi",
+    "name": "Joko Widodo",
+    "startYear": 2014,
+    "endYear": 2024,
+    "eraId": "jokowi",
+    "nickname": "Jokowi",
+    "tone": "infrastruktur, UMKM, polarisasi"
+  },
+  {
+    "id": "prabowo",
+    "name": "Prabowo Subianto",
+    "startYear": 2024,
+    "endYear": 2034,
+    "eraId": "prabowo",
+    "nickname": "Pak Prabowo",
+    "tone": "era baru, food security, continuity"
+  }
+]

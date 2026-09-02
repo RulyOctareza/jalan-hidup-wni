@@ -1,0 +1,333 @@
+[
+  {
+    "id": "cj_krismon_family",
+    "title": "Keluarga di Ujung Krisis",
+    "category": "historical",
+    "triggerYear": 1998,
+    "minAge": 3,
+    "maxAge": 60,
+    "requiredEra": "krismon",
+    "narrative": "Krisis moneter 1998. Ayah/Ibu di-PHK atau gaji dipotong drastis. Tabungan habis. Tetangga mulai jual aset.",
+    "choices": [
+      {
+        "id": "help_family_business",
+        "text": "Bantu keluarga jualan di pasar/kost",
+        "effects": { "happiness": -10, "wealth": 5, "smarts": -5, "familyBond": 15 },
+        "nextPhase": "struggling",
+        "permanentFlag": "krismon_survivor"
+      },
+      {
+        "id": "stay_in_school",
+        "text": "Tetap fokus sekolah, keluarga yang atur",
+        "effects": { "smarts": 10, "happiness": -15, "familyBond": -10 },
+        "nextPhase": "surviving",
+        "permanentFlag": "education_first"
+      },
+      {
+        "id": "migrate_work",
+        "text": "Migrasi cari kerja (Malaysia/Saudi)",
+        "effects": { "wealth": 20, "happiness": -20, "health": -5 },
+        "nextPhase": "rising",
+        "riskOutcome": { "failChance": 0.3, "failPhase": "suffering" },
+        "permanentFlag": "migrant_worker"
+      }
+    ]
+  },
+  {
+    "id": "cj_reformasi_choice",
+    "title": "Suara Reformasi",
+    "category": "historical",
+    "triggerYear": 1998,
+    "minAge": 15,
+    "maxAge": 25,
+    "narrative": "Demonstrasi mahasiswa di mana-mana. Kampus kamu ikut turun ke jalan. Presiden Suharto mundur.",
+    "choices": [
+      {
+        "id": "join_demo",
+        "text": "Ikut demonstrasi",
+        "effects": { "reputation": 15, "happiness": 10 },
+        "riskOutcome": { "failChance": 0.1, "failEffects": { "health": -20 }, "failFlag": "arrested_demo" },
+        "nextPhase": "critical",
+        "permanentFlag": "reformasi_voice"
+      },
+      {
+        "id": "stay_neutral",
+        "text": "Tetap di rumah, jaga diri",
+        "effects": { "happiness": -5, "health": 5 },
+        "nextPhase": "surviving",
+        "permanentFlag": "neutral_observer"
+      },
+      {
+        "id": "organize_aid",
+        "text": "Organisir bantuan korban kerusuhan",
+        "effects": { "reputation": 25, "happiness": 15, "wealth": -10 },
+        "nextPhase": "rising",
+        "permanentFlag": "humanitarian"
+      }
+    ]
+  },
+  {
+    "id": "cj_covid_survival",
+    "title": "Hidup di Masa COVID",
+    "category": "historical",
+    "triggerYear": 2020,
+    "minAge": 5,
+    "maxAge": 70,
+    "narrative": "Lockdown. Sektor tempat kamu kerja/belajar lumpuh. UMKM sekitar tutup. Keluarga panik.",
+    "choices": [
+      {
+        "id": "pivot_online",
+        "text": "Pivot ke online (jualan/tutor/konten)",
+        "effects": { "wealth": 10, "smarts": 5, "happiness": -5 },
+        "nextPhase": "rising",
+        "permanentFlag": "covid_adapter"
+      },
+      {
+        "id": "hold_on",
+        "text": "Tahan dengan tabungan, tunggu normal",
+        "effects": { "wealth": -20, "happiness": -15 },
+        "nextPhase": "suffering",
+        "permanentFlag": "covid_victim"
+      },
+      {
+        "id": "frontline",
+        "text": "Jadi relawan/tenaga kesehatan",
+        "effects": { "reputation": 30, "health": -15, "happiness": 10 },
+        "nextPhase": "struggling",
+        "permanentFlag": "covid_hero"
+      }
+    ]
+  },
+  {
+    "id": "cj_drop_out",
+    "title": "Putus Sekolah?",
+    "category": "personal",
+    "triggerAge": 16,
+    "minAge": 15,
+    "maxAge": 18,
+    "conditions": { "wealthPercentileMax": 30, "happinessMax": 40 },
+    "narrative": "Nilai jeblok atau keluarga tidak sanggup biaya. Guru menyarankan putus sekolah.",
+    "choices": [
+      {
+        "id": "drop_out_work",
+        "text": "Putus sekolah, kerja bantu keluarga",
+        "effects": { "smarts": -20, "wealth": 15, "happiness": -10 },
+        "nextPhase": "struggling",
+        "permanentFlag": "dropout",
+        "blocksPath": ["cpns", "professional"]
+      },
+      {
+        "id": "fight_stay",
+        "text": "Tetap sekolah, kerja part-time",
+        "effects": { "smarts": 5, "happiness": -20, "health": -5 },
+        "nextPhase": "struggling",
+        "permanentFlag": "fighter"
+      },
+      {
+        "id": "vocational",
+        "text": "Pindah ke SMK/vokasi",
+        "effects": { "smarts": 0, "wealth": 5 },
+        "nextPhase": "surviving",
+        "permanentFlag": "vocational_grad"
+      }
+    ]
+  },
+  {
+    "id": "cj_marriage_proposal",
+    "title": "Lamaran di Usia Muda",
+    "category": "personal",
+    "triggerAge": 22,
+    "minAge": 20,
+    "maxAge": 28,
+    "conditions": { "hasPartner": true },
+    "narrative": "Pasanganmu melamar. Keluarga push nikah cepat. Karir belum stabil.",
+    "choices": [
+      {
+        "id": "accept_marry",
+        "text": "Terima, nikah tahun ini",
+        "effects": { "happiness": 20, "wealth": -15, "familyBond": 20 },
+        "nextPhase": "surviving",
+        "permanentFlag": "married_young"
+      },
+      {
+        "id": "postpone",
+        "text": "Tunda, kejar karir dulu",
+        "effects": { "happiness": -10, "smarts": 5, "partnerBond": -15 },
+        "nextPhase": "rising",
+        "permanentFlag": "career_first"
+      },
+      {
+        "id": "break_up",
+        "text": "Putus, fokus diri sendiri",
+        "effects": { "happiness": -25, "smarts": 10 },
+        "nextPhase": "struggling",
+        "permanentFlag": "single_focused"
+      }
+    ]
+  },
+  {
+    "id": "cj_corruption_offer",
+    "title": "Tawaran Korupsi",
+    "category": "moral",
+    "triggerAge": 35,
+    "minAge": 28,
+    "maxAge": 55,
+    "conditions": { "jobCategory": ["pns", "government", "procurement"] },
+    "narrative": "Rekan menawarkan '项目' — terima suap, aman 5 tahun. Atau lapor ke KPK (risiko).",
+    "choices": [
+      {
+        "id": "accept_bribe",
+        "text": "Terima, diam-diam",
+        "effects": { "wealth": 40, "reputation": -30, "happiness": 10 },
+        "nextPhase": "success",
+        "riskOutcome": { "failChance": 0.25, "failPhase": "decline", "failFlag": "jailed_corruption" },
+        "permanentFlag": "corrupt"
+      },
+      {
+        "id": "report_kpk",
+        "text": "Lapor ke KPK",
+        "effects": { "reputation": 40, "happiness": 5, "health": -10 },
+        "nextPhase": "struggling",
+        "permanentFlag": "whistleblower"
+      },
+      {
+        "id": "resign",
+        "text": "Mundur dari jabatan",
+        "effects": { "wealth": -20, "happiness": -5, "reputation": 10 },
+        "nextPhase": "surviving",
+        "permanentFlag": "clean_conscience"
+      }
+    ]
+  },
+  {
+    "id": "cj_bankruptcy",
+    "title": "Bangkrut Total",
+    "category": "financial",
+    "triggerAge": null,
+    "minAge": 30,
+    "maxAge": 60,
+    "conditions": { "wealthMax": 0, "hadBusiness": true },
+    "narrative": "Bisnis kolaps. Utang menumpuk. Bank rebut aset. Keluarga kecewa.",
+    "choices": [
+      {
+        "id": "restart_small",
+        "text": "Mulai lagi dari nol — warung/ojek",
+        "effects": { "wealth": 5, "happiness": -20, "reputation": 5 },
+        "nextPhase": "recovery",
+        "permanentFlag": "phoenix"
+      },
+      {
+        "id": "suicide_attempt",
+        "text": "Menyerah — (health crisis)",
+        "effects": { "health": -40, "happiness": -50 },
+        "nextPhase": "near_death",
+        "permanentFlag": "broken_spirit"
+      },
+      {
+        "id": "family_support",
+        "text": "Minta bantuan keluarga, hidup sederhana",
+        "effects": { "wealth": 10, "happiness": -15, "familyBond": 10 },
+        "nextPhase": "surviving",
+        "permanentFlag": "humbled"
+      }
+    ]
+  },
+  {
+    "id": "cj_terminal_illness",
+    "title": "Diagnosis Penyakit Serius",
+    "category": "health",
+    "triggerAge": null,
+    "minAge": 45,
+    "maxAge": 85,
+    "conditions": { "healthMax": 30 },
+    "narrative": "Dokter mendiagnosis penyakit serius. Operasi mahal. Prognosis tidak pasti.",
+    "choices": [
+      {
+        "id": "full_treatment",
+        "text": "Operasi & treatment full (jual aset)",
+        "effects": { "health": 30, "wealth": -50, "happiness": 5 },
+        "nextPhase": "recovery",
+        "permanentFlag": "fighter_health"
+      },
+      {
+        "id": "palliative",
+        "text": "Pilih perawatan paliatif, nikmati sisa waktu",
+        "effects": { "health": -10, "happiness": 20, "familyBond": 25 },
+        "nextPhase": "near_death",
+        "permanentFlag": "accepted_fate"
+      },
+      {
+        "id": "alternative",
+        "text": "Pengobatan alternatif (risiko)",
+        "effects": { "health": -5, "wealth": -10 },
+        "riskOutcome": { "failChance": 0.5, "failPhase": "near_death" },
+        "permanentFlag": "alternative_healer"
+      }
+    ]
+  },
+  {
+    "id": "cj_ai_adaptation",
+    "title": "AI Mengancam Pekerjaanmu",
+    "category": "historical",
+    "triggerYear": 2025,
+    "minAge": 18,
+    "maxAge": 50,
+    "narrative": "Perusahaan mulai PHK karena AI. Skill kamu terancam obsolete.",
+    "choices": [
+      {
+        "id": "reskill_ai",
+        "text": "Belajar AI/tools baru (kuliah singkat)",
+        "effects": { "smarts": 20, "wealth": -10, "happiness": -5 },
+        "nextPhase": "rising",
+        "permanentFlag": "ai_literate"
+      },
+      {
+        "id": "ignore",
+        "text": "Abaikan, harap badai lewat",
+        "effects": { "smarts": -10 },
+        "riskOutcome": { "failChance": 0.6, "failPhase": "decline", "failEffects": { "wealth": -30 } },
+        "permanentFlag": "ai_denier"
+      },
+      {
+        "id": "entrepreneur",
+        "text": "Keluar, bangun bisnis sendiri",
+        "effects": { "wealth": -20, "happiness": 10 },
+        "riskOutcome": { "failChance": 0.4, "failPhase": "suffering", "successPhase": "rising" },
+        "permanentFlag": "ai_entrepreneur"
+      }
+    ]
+  },
+  {
+    "id": "cj_legacy_will",
+    "title": "Wasiat Sebelum Pergi",
+    "category": "health",
+    "triggerAge": null,
+    "minAge": 70,
+    "maxAge": 100,
+    "conditions": { "healthMax": 20 },
+    "narrative": "Dokter bilang waktu terbatas. Keluarga berkumpul. Kamu harus putuskan warisan.",
+    "choices": [
+      {
+        "id": "divide_equal",
+        "text": "Bagi rata ke semua anak",
+        "effects": { "familyBond": 20, "legacyScore": 15 },
+        "nextPhase": "near_death",
+        "permanentFlag": "fair_parent"
+      },
+      {
+        "id": "donate_charity",
+        "text": "Donasi sebagian besar ke masjid/yayasan",
+        "effects": { "reputation": 30, "legacyScore": 25, "familyBond": -15 },
+        "nextPhase": "near_death",
+        "permanentFlag": "philanthropist"
+      },
+      {
+        "id": "secret_favor",
+        "text": "Favoritkan satu anak (rahasia)",
+        "effects": { "familyBond": -20, "legacyScore": -10 },
+        "nextPhase": "near_death",
+        "permanentFlag": "family_rift"
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "composer": "tools/compose_bgm.py",
+  "style": "pelog_lofi_nusantara",
+  "bgm": [
+    {"id": "bgm_menu", "path": "assets/audio/bgm/bgm_menu.mp3", "bpm": 62, "mood": "menu"},
+    {"id": "bgm_life_warm", "path": "assets/audio/bgm/bgm_life_warm.mp3", "bpm": 72, "mood": "warm"},
+    {"id": "bgm_life_struggle", "path": "assets/audio/bgm/bgm_life_struggle.mp3", "bpm": 84, "mood": "struggle"},
+    {"id": "bgm_life_sorrow", "path": "assets/audio/bgm/bgm_life_sorrow.mp3", "bpm": 54, "mood": "sorrow"},
+    {"id": "bgm_life_hope", "path": "assets/audio/bgm/bgm_life_hope.mp3", "bpm": 76, "mood": "hope"},
+    {"id": "bgm_life_legacy", "path": "assets/audio/bgm/bgm_life_legacy.mp3", "bpm": 50, "mood": "legacy"}
+  ],
+  "sfx": [
+    {"id": "sfx_tap", "path": "assets/audio/sfx/sfx_tap.mp3"},
+    {"id": "sfx_age_up", "path": "assets/audio/sfx/sfx_age_up.mp3"},
+    {"id": "sfx_positive", "path": "assets/audio/sfx/sfx_positive.mp3"},
+    {"id": "sfx_negative", "path": "assets/audio/sfx/sfx_negative.mp3"},
+    {"id": "sfx_event", "path": "assets/audio/sfx/sfx_event.mp3"}
+  ]
+}

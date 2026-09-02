@@ -1,0 +1,159 @@
+[
+  {
+    "id": "krismon_1998",
+    "year": 1998,
+    "title": "Krisis Moneter 1998",
+    "category": "economic",
+    "severity": "catastrophic",
+    "description": "Rupiah anjlok drastis. PHK massal. Kerusuhan di beberapa kota. Presiden Suharto mundur 21 Mei 1998.",
+    "effects": {
+      "nationalWealthModifier": -0.4,
+      "unemploymentSpike": 0.25,
+      "politicalStability": -0.5
+    },
+    "phaseForce": "suffering",
+    "criticalJunctionId": "cj_krismon_family",
+    "minAgeToExperience": 3,
+    "headline": "📰 KRISIS! Rupiah jeblok, Indonesia bergolak"
+  },
+  {
+    "id": "reformasi_1998",
+    "year": 1998,
+    "title": "Reformasi",
+    "category": "political",
+    "severity": "major",
+    "description": "Gelombang demonstrasi mahasiswa. Transisi ke era demokrasi.",
+    "effects": {
+      "politicalStability": -0.3,
+      "freedomIndex": 0.4
+    },
+    "phaseForce": "critical",
+    "criticalJunctionId": "cj_reformasi_choice",
+    "minAgeToExperience": 15,
+    "headline": "📰 REFORMASI: Mahasiswa turun ke jalan"
+  },
+  {
+    "id": "tsunami_2004",
+    "year": 2004,
+    "title": "Tsunami Aceh",
+    "category": "disaster",
+    "severity": "catastrophic",
+    "description": "Gempa dan tsunami dahsyat. Aceh hancur. Seluruh Indonesia berduka.",
+    "effects": {
+      "healthRegional": -0.2,
+      "happinessNational": -0.15
+    },
+    "phaseForce": null,
+    "affectedProvinces": ["Aceh", "Sumatera Utara"],
+    "criticalJunctionId": "cj_tsunami_aid",
+    "minAgeToExperience": 5,
+    "headline": "📰 TSUNAMI: Tragedi nasional, ribuan korban"
+  },
+  {
+    "id": "facebook_boom",
+    "year": 2008,
+    "title": "Era Facebook Indonesia",
+    "category": "technology",
+    "severity": "moderate",
+    "description": "Media sosial masuk Indonesia. Cara remaja bersosialisasi berubah.",
+    "effects": {
+      "smartsTech": 0.1,
+      "socialChange": 0.2
+    },
+    "phaseForce": null,
+    "minAgeToExperience": 10,
+    "headline": "📰 Facebook booming di Indonesia"
+  },
+  {
+    "id": "jokowi_elected",
+    "year": 2014,
+    "title": "Jokowi Terpilih Presiden",
+    "category": "political",
+    "severity": "moderate",
+    "description": "Presiden pertama non-elit militer/orde lama. Harapan rakyat jelata.",
+    "effects": {
+      "politicalStability": 0.1,
+      "infrastructureBoost": 0.15
+    },
+    "phaseForce": null,
+    "minAgeToExperience": 5,
+    "headline": "📰 Jokowi sworn in — Indonesia baru?"
+  },
+  {
+    "id": "ojek_online_boom",
+    "year": 2015,
+    "title": "Revolusi Ojek Online",
+    "category": "economic",
+    "severity": "moderate",
+    "description": "Gojek dan Grab mengubah transportasi dan lapangan kerja.",
+    "effects": {
+      "gigEconomyJobs": 0.3,
+      "urbanMobility": 0.2
+    },
+    "phaseForce": null,
+    "minAgeToExperience": 17,
+    "headline": "📰 Ojek online — pekerjaan baru di jalanan"
+  },
+  {
+    "id": "covid_2020",
+    "year": 2020,
+    "title": "Pandemi COVID-19",
+    "category": "disaster",
+    "severity": "catastrophic",
+    "description": "Lockdown, sekolah online, PHK masal, UMKM collapse.",
+    "effects": {
+      "nationalWealthModifier": -0.25,
+      "healthRisk": 0.3,
+      "unemploymentSpike": 0.15
+    },
+    "phaseForce": "suffering",
+    "criticalJunctionId": "cj_covid_survival",
+    "minAgeToExperience": 3,
+    "headline": "📰 PANDEMI: Indonesia lockdown"
+  },
+  {
+    "id": "utbk_reform",
+    "year": 2019,
+    "title": "Reformasi UTBK/SBMPTN",
+    "category": "education",
+    "severity": "minor",
+    "description": "Sistem masuk PTN makin kompetitif. Generasi muda under pressure.",
+    "effects": {
+      "educationPressure": 0.2
+    },
+    "phaseForce": null,
+    "minAgeToExperience": 17,
+    "headline": "📰 UTBK makin ketat — siswa stress"
+  },
+  {
+    "id": "bbm_subsidy_cut",
+    "year": 2022,
+    "title": "Kenaikan BBM Subsidi",
+    "category": "economic",
+    "severity": "major",
+    "description": "Harga BBM naik. Demonstrasi di beberapa kota. Daya beli menurun.",
+    "effects": {
+      "nationalWealthModifier": -0.1,
+      "happinessNational": -0.08
+    },
+    "phaseForce": "struggling",
+    "minAgeToExperience": 10,
+    "headline": "📰 BBM naik — rakyat protes"
+  },
+  {
+    "id": "ai_disruption",
+    "year": 2025,
+    "title": "Revolusi AI",
+    "category": "technology",
+    "severity": "major",
+    "description": "AI menggantikan pekerjaan entry-level. Generasi muda harus adaptasi.",
+    "effects": {
+      "jobDisplacement": 0.2,
+      "smartsTech": 0.15
+    },
+    "phaseForce": "critical",
+    "criticalJunctionId": "cj_ai_adaptation",
+    "minAgeToExperience": 18,
+    "headline": "📰 AI ubah dunia kerja Indonesia"
+  }
+]

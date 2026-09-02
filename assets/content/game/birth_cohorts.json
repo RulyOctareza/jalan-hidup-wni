@@ -1,0 +1,67 @@
+[
+  {
+    "id": "cohort_1965",
+    "birthYearMin": 1960,
+    "birthYearMax": 1969,
+    "label": "Generasi Orde Baru",
+    "openingTemplate": "Tahun {birthYear}. Indonesia {eraContext}. Presiden saat kamu lahir: {presidentAtBirth}.\n\nKeluargamu di {province}, hidup {economicClass}. Ayah {fatherJob}, ibu {motherRole}.\n\nKamu lahir tanpa tahu bahwa negara sedang/sudah berubah — dan hidupmu akan terikat dengan sejarah itu.",
+    "definingEvents": ["transisi_65", "orde_baru_awal", "krismon_1998"],
+    "typicalArc": "innocence → surviving (P4 era) → struggling (Krismon di usia dewasa) → rising/success (2000s) → near_death",
+    "childhoodEvents": ["belajar_p4", "tv_pertama", "sepeda_ontel"],
+    "teenEvents": ["krismon_sma", "demo_reformasi", "kuliah_utm"],
+    "adultPeakAge": { "min": 45, "max": 60 },
+    "legacyThemes": ["survivor", "PNS", "umkm_pioneer"]
+  },
+  {
+    "id": "cohort_1980",
+    "birthYearMin": 1975,
+    "birthYearMax": 1984,
+    "label": "Generasi Prosperity",
+    "openingTemplate": "Tahun {birthYear}. Suharto memimpin Indonesia fase pembangunan. Presiden saat kamu lahir: {presidentAtBirth}.\n\nDi {city}, keluarga {familyName} hidup {economicClass}. Orang tua menabung untuk sekolahmu.\n\nGenerasimu tumbuh dengan TV, sinetron, dan mimpi jadi profesional.",
+    "definingEvents": ["orde_baru_puncak", "krismon_1998", "reformasi", "sby"],
+    "typicalArc": "innocence → rising (teen) → suffering (Krismon usia 18-22) → struggling → success (30-45) → decline? → recovery",
+    "childhoodEvents": ["sinetron_ramadan", "main_warnet_preview"],
+    "teenEvents": ["krismon_kuliah", "reformasi_demo", "utbk_first"],
+    "adultPeakAge": { "min": 38, "max": 52 },
+    "legacyThemes": ["reformasi_generation", "middle_class", "professional"]
+  },
+  {
+    "id": "cohort_1995",
+    "birthYearMin": 1990,
+    "birthYearMax": 1999,
+    "label": "Generasi Reformasi",
+    "openingTemplate": "Tahun {birthYear}. {eraContext}. Presiden: {presidentAtBirth}.\n\nSaat kamu masih kecil, Indonesia dilanda krisis moneter (1998). {krismonChildhoodImpact}\n\nKamu tumbuh di {province} — generasi yang melihat Orde Baru runtuh dan demokrasi lahir.",
+    "definingEvents": ["krismon_1998", "tsunami_2004", "facebook_boom", "jokowi_elected", "covid_2020"],
+    "typicalArc": "suffering (childhood Krismon) → innocence → struggling (UTBK) → rising (ojek/startup) → success/decline → near_death",
+    "childhoodEvents": ["krismon_trauma", "warnet_era", "musik_band"],
+    "teenEvents": ["facebook", "bbm_first", "utbk_stress"],
+    "adultPeakAge": { "min": 32, "max": 45 },
+    "legacyThemes": ["digital_native_early", "startup", "influencer"]
+  },
+  {
+    "id": "cohort_2000",
+    "birthYearMin": 2000,
+    "birthYearMax": 2009,
+    "label": "Generasi Millennial Indonesia",
+    "openingTemplate": "Tahun {birthYear}. Gus Dur/Megawati/SBY era. Presiden saat lahir: {presidentAtBirth}.\n\nKamu tumbuh dengan internet, mall, dan UTBK. Di {city}, hidup terasa {economicClass}.\n\nGenerasimu dijuluki millennial — di antara analog dan digital.",
+    "definingEvents": ["sby", "jokowi_elected", "ojek_online_boom", "covid_2020", "ai_disruption"],
+    "typicalArc": "innocence → struggling (UTBK) → surviving (kerja pertama) → rising (ojek/karir) → covid suffering → recovery",
+    "childhoodEvents": ["nintendo_ds", "mall_weekend"],
+    "teenEvents": ["instagram", "utbk", "first_crush"],
+    "adultPeakAge": { "min": 28, "max": 40 },
+    "legacyThemes": ["millennial", "content_creator", "remote_worker"]
+  },
+  {
+    "id": "cohort_2010",
+    "birthYearMin": 2010,
+    "birthYearMax": 2015,
+    "label": "Generasi Digital Native",
+    "openingTemplate": "Tahun {birthYear}. SBY/Jokowi era. Presiden saat lahir: {presidentAtBirth}.\n\nSmartphone ada sebelum kamu SMP. TikTok sebelum kamu lulus SMA.\n\nCOVID mengubah sekolahmu jadi online di usia {covidAge}. Generasimu belum selesai ditulis sejarahnya.",
+    "definingEvents": ["jokowi_elected", "ojek_online_boom", "covid_2020", "bbm_subsidy_cut", "ai_disruption"],
+    "typicalArc": "innocence → struggling (covid school) → rising (digital economy) → ? (future player-driven)",
+    "childhoodEvents": ["tablet_kids", "youtube_kids"],
+    "teenEvents": ["covid_online_school", "tiktok", "ojek_parttime"],
+    "adultPeakAge": { "min": 25, "max": 35 },
+    "legacyThemes": ["gen_z_indonesia", "ai_native", "climate_anxiety"]
+  }
+]

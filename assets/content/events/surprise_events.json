@@ -1,0 +1,188 @@
+[
+  {
+    "id": "jajan_es_teh",
+    "title": "Tiba-tiba... Jajan Es Teh!",
+    "description": "Teman nge-chat: 'Yuk es teh depan sekolah!' Tanpa rencana.",
+    "minAge": 6,
+    "maxAge": 17,
+    "weight": 10,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Gas jajan!", "effects": { "happiness": 8, "wealth": -8000 } },
+      { "text": "Skip, lagi bokek", "effects": { "happiness": -2 } }
+    ]
+  },
+  {
+    "id": "promosi_jabatan",
+    "title": "Promosi Jabatan!",
+    "description": "HR tiba-tiba panggil kamu. Atasan mau naikkan posisimu!",
+    "minAge": 22,
+    "requiresJob": true,
+    "weight": 6,
+    "trigger": "surprise",
+    "imageAsset": "success",
+    "choices": [
+      { "text": "Terima promosi", "effects": { "happiness": 15, "wealth": 5000000, "health": -4 } },
+      { "text": "Tolak, belum siap", "effects": { "happiness": -5, "reputation": 5 } }
+    ]
+  },
+  {
+    "id": "phk_mendadak",
+    "title": "PHK Mendadak",
+    "description": "Perusahaan efisiensi. Surat PHK masuk email pagi-pagi.",
+    "minAge": 20,
+    "requiresJob": true,
+    "weight": 4,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Terima, cari kerja baru", "effects": { "happiness": -20, "wealth": -3000000 } },
+      { "text": "Nego pesangon", "effects": { "happiness": -10, "wealth": 2000000, "reputation": -5 } }
+    ]
+  },
+  {
+    "id": "dapat_thr",
+    "title": "THR Cair!",
+    "description": "Rekening berbunyi — THR/ bonus tahunan masuk!",
+    "minAge": 18,
+    "weight": 5,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Tabung semua", "effects": { "wealth": 3000000, "happiness": 5 } },
+      { "text": "Traktir keluarga", "effects": { "wealth": 1000000, "happiness": 12, "reputation": 5 } }
+    ]
+  },
+  {
+    "id": "hujan_sakit",
+    "title": "Kehujanan",
+    "description": "Hujan deras tiba-tiba. Kamu basah kuyup pulang.",
+    "minAge": 5,
+    "weight": 7,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Minum obat & tidur", "effects": { "health": -5, "wealth": -50000 } },
+      { "text": "Cuekin aja", "effects": { "health": -12, "happiness": -3 } }
+    ]
+  },
+  {
+    "id": "rejeki_nomplok",
+    "title": "Rejeki Nomplok",
+    "description": "Nemu dompet di jalan. Isinya cukup banyak.",
+    "minAge": 10,
+    "weight": 2,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Ambil uangnya", "effects": { "wealth": 2000000, "reputation": -10 } },
+      { "text": "Serahkan ke polisi", "effects": { "reputation": 20, "happiness": 8 } }
+    ]
+  },
+  {
+    "id": "viral_tiktok",
+    "title": "Video Viral!",
+    "description": "Video kamu tiba-tiba FYP. Notifikasi meledak!",
+    "minAge": 13,
+    "weight": 4,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Jadi content creator", "effects": { "happiness": 15, "wealth": 1000000, "smarts": -3 } },
+      { "text": "Privasi akun", "effects": { "happiness": -5, "health": 3 } }
+    ]
+  },
+  {
+    "id": "tawaran_bisnis",
+    "title": "Tawaran Bisnis",
+    "description": "Teman lama DM: 'Yuk buka warung bareng?'",
+    "minAge": 20,
+    "weight": 5,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Investasi modal", "effects": { "wealth": -5000000, "happiness": 5 } },
+      { "text": "Tolak sopan", "effects": { "happiness": 0 } }
+    ]
+  },
+  {
+    "id": "tetangga_ribet",
+    "title": "Tetangga Ngomel",
+    "description": "Tetangga protes suara/sampah. Konfrontasi tiba-tiba.",
+    "minAge": 8,
+    "weight": 6,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Minta maaf & bereskan", "effects": { "reputation": 5, "happiness": -5 } },
+      { "text": "Balas marah", "effects": { "reputation": -15, "happiness": -8 } }
+    ]
+  },
+  {
+    "id": "ketemu_mantant",
+    "title": "Ketemu Mantan",
+    "description": "Di warung, kamu bertemu mantan. Awkward banget.",
+    "minAge": 16,
+    "weight": 5,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Sapa & ngobrol", "effects": { "happiness": -5, "looks": 1 } },
+      { "text": "Pura-pura nggak lihat", "effects": { "happiness": 2 } }
+    ]
+  },
+  {
+    "id": "lupa_dompet",
+    "title": "Lupa Dompet",
+    "description": "Mau bayar, dompet nggak ada. Malu setengah mati.",
+    "minAge": 12,
+    "weight": 7,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Pinjam teman", "effects": { "happiness": -8, "reputation": -3 } },
+      { "text": "Balik kerumah ambil", "effects": { "happiness": -4, "health": -1 } }
+    ]
+  },
+  {
+    "id": "macet_parah",
+    "title": "Macet Parah",
+    "description": "Ojek/mobil macet 2 jam. Janji terlambat.",
+    "minAge": 15,
+    "weight": 6,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Cancel semua", "effects": { "happiness": -6, "reputation": -5 } },
+      { "text": "Tetap jalan kaki", "effects": { "health": -3, "happiness": -2 } }
+    ]
+  },
+  {
+    "id": "main_layang",
+    "title": "Main Layang-layang",
+    "description": "Angin kencang! Teman ajak main layang-layang.",
+    "minAge": 5,
+    "maxAge": 14,
+    "weight": 8,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Main!", "effects": { "happiness": 10, "health": 3 } },
+      { "text": "Nggak dulu", "effects": { "happiness": -2 } }
+    ]
+  },
+  {
+    "id": "mudik_mendadak",
+    "title": "Undangan Mudik",
+    "description": "Keluarga bigung: 'Lebaran minggu depan, mudik yuk?'",
+    "minAge": 18,
+    "weight": 4,
+    "trigger": "age_up",
+    "imageAsset": "mudik",
+    "choices": [
+      { "text": "Ikut mudik", "effects": { "happiness": 15, "wealth": -4000000 } },
+      { "text": "Tetap di kota", "effects": { "happiness": -10 } }
+    ]
+  },
+  {
+    "id": "kena_tipu",
+    "title": "Kena Tipu Online",
+    "description": "Order online ternyata penipuan. Barang nggak nyampe.",
+    "minAge": 16,
+    "weight": 5,
+    "trigger": "surprise",
+    "choices": [
+      { "text": "Lapor polisi online", "effects": { "wealth": -500000, "happiness": -8 } },
+      { "text": "Anggep lesson learned", "effects": { "wealth": -500000, "smarts": 3 } }
+    ]
+  }
+]
