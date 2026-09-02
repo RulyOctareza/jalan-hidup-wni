@@ -7,10 +7,13 @@ import 'package:jalan_hidup_wni/presentation/providers/app_providers.dart';
 import 'package:jalan_hidup_wni/presentation/providers/audio_provider.dart';
 import 'package:jalan_hidup_wni/presentation/providers/life_notifier.dart';
 import 'package:jalan_hidup_wni/presentation/widgets/activity_menu_sheet.dart';
-import 'package:jalan_hidup_wni/presentation/widgets/energy_bar.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/animated_energy_bar.dart';
 import 'package:jalan_hidup_wni/presentation/widgets/event_dialog.dart';
-import 'package:jalan_hidup_wni/presentation/widgets/phase_badge.dart';
-import 'package:jalan_hidup_wni/presentation/widgets/stat_bar.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/history_reader_sheet.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/life_hero_header.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/life_log_panel.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/music_toggle_button.dart';
+import 'package:jalan_hidup_wni/presentation/widgets/stat_grid.dart';
 
 class LifeScreen extends ConsumerStatefulWidget {
   const LifeScreen({super.key});
@@ -19,10 +22,20 @@ class LifeScreen extends ConsumerStatefulWidget {
   ConsumerState<LifeScreen> createState() => _LifeScreenState();
 }
 
-class _LifeScreenState extends ConsumerState<LifeScreen> {
+class _LifeScreenState extends ConsumerState<LifeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _agePulse;
+
   @override
   void initState() {
     super.initState();
+    _agePulse = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+      lowerBound: 0.95,
+      upperBound: 1.05,
+    );
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final state = ref.read(lifeNotifierProvider);
       if (state.save == null) {
@@ -34,6 +47,12 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
       }
       _showOpeningIfNeeded();
     });
+  }
+
+  @override
+  void dispose() {
+    _agePulse.dispose();
+    super.dispose();
   }
 
   void _showOpeningIfNeeded() {
@@ -55,6 +74,30 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
     }
   }
 
+  void _showHistoryArticle(LifeState state) {
+    final article = state.pendingHistoryArticle;
+    if (article == null || !mounted) return;
+    ref.read(audioServiceProvider).event();
+    HistoryReaderSheet.show(
+      context,
+      article: article,
+      fallbackImage: state.pendingHistoryFallbackImage,
+    ).then((_) {
+      ref.read(lifeNotifierProvider.notifier).dismissHistoryArticle();
+      final pending = ref.read(lifeNotifierProvider).pendingEvent;
+      if (pending != null && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('⚡ ${pending.title}'),
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+        _showPendingEvent();
+      }
+    });
+  }
+
   void _showPendingEvent() {
     final event = ref.read(lifeNotifierProvider).pendingEvent;
     if (event == null || !mounted) return;
@@ -71,23 +114,12 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
     );
   }
 
-  void _showSurpriseBanner(String title) {
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('⚡ Kejadian: $title'),
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
   String _formatRupiah(int amount) {
     if (amount >= 1_000_000_000) {
-      return 'Rp ${(amount / 1_000_000_000).toStringAsFixed(1)}M';
+      return 'Rp ${(amount / 1_000_000_000).toStringAsFixed(1)} M';
     }
     if (amount >= 1_000_000) {
-      return 'Rp ${(amount / 1_000_000).toStringAsFixed(1)}jt';
+      return 'Rp ${(amount / 1_000_000).toStringAsFixed(1)} jt';
     }
     return 'Rp $amount';
   }
@@ -103,9 +135,23 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
           prev?.save?.phaseId != next.save?.phaseId) {
         ref.read(audioServiceProvider).playBgmForPhase(next.save!.phaseId);
       }
-      if (next.pendingEvent != null &&
-          prev?.pendingEvent?.id != next.pendingEvent?.id) {
-        _showSurpriseBanner(next.pendingEvent!.title);
+      if (next.save != null && prev?.save?.age != next.save?.age) {
+        _agePulse.forward(from: 0);
+      }
+      if (next.pendingHistoryArticle != null &&
+          prev?.pendingHistoryArticle?.id !=
+              next.pendingHistoryArticle?.id) {
+        _showHistoryArticle(next);
+      } else if (next.pendingEvent != null &&
+          prev?.pendingEvent?.id != next.pendingEvent?.id &&
+          next.pendingHistoryArticle == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('⚡ ${next.pendingEvent!.title}'),
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
         _showPendingEvent();
       }
       if (next.error != null && next.error != prev?.error) {
@@ -128,16 +174,9 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
       return Scaffold(
         appBar: AppBar(title: const Text('Hidup')),
         body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Tidak ada save ditemukan'),
-              const SizedBox(height: 12),
-              ElevatedButton(
-                onPressed: () => context.go('/home'),
-                child: const Text('Kembali'),
-              ),
-            ],
+          child: ElevatedButton(
+            onPressed: () => context.go('/home'),
+            child: const Text('Kembali'),
           ),
         ),
       );
@@ -147,183 +186,75 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
     final avatarKey = simulator.avatarKeyFor(save);
     final phaseName = phasesAsync.maybeWhen(
       data: (phases) {
-        final match =
-            phases.where((p) => p.id == save.phaseId).toList();
+        final match = phases.where((p) => p.id == save.phaseId).toList();
         return match.isEmpty ? save.phaseId : match.first.name;
       },
       orElse: () => save.phaseId,
     );
 
     return Scaffold(
+      backgroundColor: AppColors.cream,
       appBar: AppBar(
         title: Text(save.character.name),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () => context.go('/home'),
-          ),
+        actions: const [
+          MusicToggleButton(),
+          SizedBox(width: 4),
         ],
       ),
       body: Column(
         children: [
-          Image.asset(
-            AssetPaths.background('home_urban'),
-            height: 100,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
-              height: 100,
-              color: AppColors.primary,
+          LifeHeroHeader(
+            save: save,
+            avatarKey: avatarKey,
+            phaseName: phaseName,
+            avatarBuilder: (key) => ClipRRect(
+              borderRadius: BorderRadius.circular(36),
+              child: Image.asset(
+                AssetPaths.avatar(key),
+                width: 64,
+                height: 64,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => CircleAvatar(
+                  radius: 32,
+                  child: Text('${save.age}'),
+                ),
+              ),
             ),
           ),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.asset(
-                        AssetPaths.avatar(avatarKey),
-                        width: 72,
-                        height: 72,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => CircleAvatar(
-                          radius: 36,
-                          child: Text('${save.age}'),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${save.age} tahun • ${save.currentYear}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            save.character.province,
-                            style: const TextStyle(color: AppColors.textMuted),
-                          ),
-                          if (save.jobTitle != null)
-                            Text(
-                              save.jobTitle!,
-                              style: const TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          const SizedBox(height: 6),
-                          PhaseBadge(
-                            phaseId: save.phaseId,
-                            phaseName: phaseName,
-                          ),
-                        ],
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AnimatedEnergyBar(
+                    energy: save.energy,
+                    maxEnergy: save.maxEnergy,
+                  ),
+                  if (!save.hasEnergyLeft) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      'Energi habis — waktunya menua?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.primary.withValues(alpha: 0.85),
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 16),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        EnergyBar(
-                          energy: save.energy,
-                          maxEnergy: save.maxEnergy,
-                        ),
-                        if (!save.hasEnergyLeft) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            'Energi habis — waktunya menua?',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: AppColors.primary.withValues(alpha: 0.8),
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ],
-                        const Divider(height: 20),
-                        StatBar(
-                          label: 'Kebahagiaan',
-                          value: save.happiness,
-                          iconAsset: AssetPaths.stat('happiness'),
-                          color: AppColors.gold,
-                        ),
-                        StatBar(
-                          label: 'Kesehatan',
-                          value: save.health,
-                          iconAsset: AssetPaths.stat('health'),
-                          color: AppColors.red,
-                        ),
-                        StatBar(
-                          label: 'Kecerdasan',
-                          value: save.smarts,
-                          iconAsset: AssetPaths.stat('smarts'),
-                          color: AppColors.blue,
-                        ),
-                        StatBar(
-                          label: 'Penampilan',
-                          value: save.looks,
-                          iconAsset: AssetPaths.stat('looks'),
-                          color: Colors.pink,
-                        ),
-                        const Divider(),
-                        Row(
-                          children: [
-                            Image.asset(
-                              AssetPaths.stat('wealth'),
-                              width: 28,
-                              height: 28,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              'Kekayaan: ${_formatRupiah(save.wealth)}',
-                              style: const TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  const SizedBox(height: 14),
+                  StatGrid(
+                    happiness: save.happiness,
+                    health: save.health,
+                    smarts: save.smarts,
+                    looks: save.looks,
+                    wealthLabel: _formatRupiah(save.wealth),
                   ),
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Riwayat Hidup',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                const SizedBox(height: 8),
-                ...save.log.take(8).map(
-                      (e) => Card(
-                        margin: const EdgeInsets.only(bottom: 8),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            radius: 16,
-                            backgroundColor: AppColors.primary,
-                            child: Text(
-                              '${e.age}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                              ),
-                            ),
-                          ),
-                          title: Text(
-                            e.message,
-                            style: const TextStyle(fontSize: 13),
-                          ),
-                        ),
-                      ),
-                    ),
-              ],
+                  const SizedBox(height: 16),
+                  LifeLogPanel(log: save.log),
+                ],
+              ),
             ),
           ),
         ],
@@ -333,45 +264,49 @@ class _LifeScreenState extends ConsumerState<LifeScreen> {
           : SafeArea(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: ElevatedButton.icon(
-                        onPressed: save.isAlive
-                            ? () => ActivityMenuSheet.show(context, save)
-                            : null,
-                        icon: const Icon(Icons.grid_view_rounded),
-                        label: const Text('Aktivitas'),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                child: ScaleTransition(
+                  scale: _agePulse,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton.icon(
+                          onPressed: save.isAlive
+                              ? () => ActivityMenuSheet.show(context, save)
+                              : null,
+                          icon: const Icon(Icons.grid_view_rounded),
+                          label: const Text('Aktivitas'),
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: save.isAlive
-                            ? () async {
-                                await ref.read(audioServiceProvider).ageUp();
-                                await ref
-                                    .read(lifeNotifierProvider.notifier)
-                                    .ageUp();
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.gold,
-                          foregroundColor: AppColors.textDark,
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: save.isAlive
+                              ? () async {
+                                  await ref
+                                      .read(audioServiceProvider)
+                                      .ageUp();
+                                  await ref
+                                      .read(lifeNotifierProvider.notifier)
+                                      .ageUp();
+                                }
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.gold,
+                            foregroundColor: AppColors.textDark,
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          child: const Text('+1 Th'),
                         ),
-                        child: const Text('+1 Th'),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-      floatingActionButton: null,
     );
   }
 }

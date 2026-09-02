@@ -5,40 +5,70 @@ import 'package:jalan_hidup_wni/core/constants/audio_paths.dart';
 /// Manages looping BGM + one-shot SFX with crossfade between tracks.
 class AudioService {
   AudioService() {
-    _bgmPlayer.setReleaseMode(ReleaseMode.loop);
-    _bgmPlayer.setVolume(_bgmVolume);
-    _sfxPlayer.setReleaseMode(ReleaseMode.stop);
-    _sfxPlayer.setVolume(_sfxVolume);
+    _init();
   }
 
-  static const double _bgmVolume = 0.45;
-  static const double _sfxVolume = 0.7;
+  static const double _bgmVolume = 0.55;
+  static const double _sfxVolume = 0.75;
 
   final AudioPlayer _bgmPlayer = AudioPlayer();
   final AudioPlayer _sfxPlayer = AudioPlayer();
 
   String? _currentBgm;
   bool _enabled = true;
+  bool _initialized = false;
 
   bool get enabled => _enabled;
+
+  Future<void> _init() async {
+    if (_initialized) return;
+    _initialized = true;
+
+    await AudioPlayer.global.setAudioContext(
+      AudioContext(
+        android: AudioContextAndroid(
+          isSpeakerphoneOn: true,
+          stayAwake: true,
+          contentType: AndroidContentType.music,
+          usageType: AndroidUsageType.game,
+          audioFocus: AndroidAudioFocus.gain,
+        ),
+        iOS: AudioContextIOS(
+          category: AVAudioSessionCategory.playback,
+          options: {AVAudioSessionOptions.mixWithOthers},
+        ),
+      ),
+    );
+
+    await _bgmPlayer.setReleaseMode(ReleaseMode.loop);
+    await _bgmPlayer.setVolume(_bgmVolume);
+    await _bgmPlayer.setPlayerMode(PlayerMode.mediaPlayer);
+
+    await _sfxPlayer.setReleaseMode(ReleaseMode.stop);
+    await _sfxPlayer.setVolume(_sfxVolume);
+  }
 
   set enabled(bool value) {
     _enabled = value;
     if (!value) {
       _bgmPlayer.stop();
+    } else if (_currentBgm != null) {
+      playBgm(_currentBgm!, force: true);
     }
   }
 
-  Future<void> playBgm(String assetPath) async {
+  Future<void> playBgm(String assetPath, {bool force = false}) async {
+    await _init();
     if (!_enabled) return;
-    if (_currentBgm == assetPath) return;
+    if (!force && _currentBgm == assetPath) return;
 
     _currentBgm = assetPath;
     try {
       await _bgmPlayer.stop();
       await _bgmPlayer.play(AssetSource(assetPath));
-    } catch (e) {
-      debugPrint('BGM play error: $e');
+      debugPrint('BGM playing: $assetPath');
+    } catch (e, st) {
+      debugPrint('BGM play error ($assetPath): $e\n$st');
     }
   }
 
@@ -56,6 +86,7 @@ class AudioService {
   }
 
   Future<void> playSfx(String assetPath) async {
+    await _init();
     if (!_enabled) return;
     try {
       await _sfxPlayer.stop();

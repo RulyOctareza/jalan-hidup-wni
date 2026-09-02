@@ -1,11 +1,82 @@
 [
   {
+    "id": "proklamasi_1945",
+    "year": 1945,
+    "title": "Proklamasi Kemerdekaan",
+    "category": "political",
+    "severity": "major",
+    "description": "Soekarno-Hatta membacakan Proklamasi. Indonesia merdeka setelah 350 tahun penjajahan.",
+    "articleId": "proklamasi_1945",
+    "fallbackImage": "assets/images/history/events/proklamasi_1945.jpg",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 0,
+    "headline": "📰 MERDEKA! Indonesia lahir 17 Agustus 1945"
+  },
+  {
+    "id": "konferensi_meja_bundar",
+    "year": 1949,
+    "title": "Konferensi Meja Bundar",
+    "category": "political",
+    "severity": "major",
+    "description": "Belanda mengakui kedaulatan RI. Transfer kekuasaan resmi di Den Haag.",
+    "articleId": "konferensi_meja_bundar",
+    "fallbackImage": "assets/images/history/events/konferensi_meja_bundar.jpg",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 0,
+    "headline": "📰 Belanda akui RI — kedaulatan resmi 1949"
+  },
+  {
+    "id": "konfrontasi_malaysia",
+    "year": 1963,
+    "title": "Konfrontasi Malaysia",
+    "category": "political",
+    "severity": "major",
+    "description": "Indonesia menentang pembentukan Malaysia. Ketegangan militer di Kalimantan.",
+    "articleId": "konfrontasi_malaysia",
+    "fallbackImage": "assets/images/history/events/konfrontasi_malaysia.jpg",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 5,
+    "headline": "📰 Konfrontasi Malaysia — ketegangan regional"
+  },
+  {
+    "id": "g30s_1965",
+    "year": 1965,
+    "title": "Peristiwa 30 September",
+    "category": "political",
+    "severity": "catastrophic",
+    "description": "Gerakan 30 September meletus. Politik Indonesia berubah drastis.",
+    "articleId": "g30s_1965",
+    "effects": {},
+    "phaseForce": "critical",
+    "minAgeToExperience": 5,
+    "headline": "📰 G30S — Indonesia di ambang perubahan besar"
+  },
+  {
+    "id": "orde_baru",
+    "year": 1967,
+    "title": "Era Orde Baru",
+    "category": "political",
+    "severity": "major",
+    "description": "Soeharto memimpin Orde Baru. Stabilitas ekonomi, tekanan politik.",
+    "articleId": "orde_baru",
+    "fallbackImage": "assets/images/history/events/orde_baru.png",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 3,
+    "headline": "📰 Orde Baru dimulai — era Soeharto"
+  },
+  {
     "id": "krismon_1998",
     "year": 1998,
     "title": "Krisis Moneter 1998",
     "category": "economic",
     "severity": "catastrophic",
     "description": "Rupiah anjlok drastis. PHK massal. Kerusuhan di beberapa kota. Presiden Suharto mundur 21 Mei 1998.",
+    "articleId": "krismon_1998",
+    "fallbackImage": "assets/images/events/event_krismon.png",
     "effects": {
       "nationalWealthModifier": -0.4,
       "unemploymentSpike": 0.25,
@@ -23,6 +94,8 @@
     "category": "political",
     "severity": "major",
     "description": "Gelombang demonstrasi mahasiswa. Transisi ke era demokrasi.",
+    "articleId": "reformasi_1998",
+    "fallbackImage": "assets/images/events/event_reformasi.png",
     "effects": {
       "politicalStability": -0.3,
       "freedomIndex": 0.4
@@ -33,12 +106,39 @@
     "headline": "📰 REFORMASI: Mahasiswa turun ke jalan"
   },
   {
+    "id": "fall_suharto",
+    "year": 1998,
+    "title": "Lengsernya Soeharto",
+    "category": "political",
+    "severity": "major",
+    "description": "Presiden Soeharto mundur setelah 32 tahun berkuasa. BJ Habibie menggantikan.",
+    "articleId": "fall_suharto",
+    "effects": {},
+    "phaseForce": "critical",
+    "minAgeToExperience": 5,
+    "headline": "📰 Soeharto lengser — bab baru Indonesia"
+  },
+  {
+    "id": "bom_bali_2002",
+    "year": 2002,
+    "title": "Pengeboman Bali 2002",
+    "category": "disaster",
+    "severity": "catastrophic",
+    "description": "Bom meledak di Kuta. Ratusan korban. Pariwisata Bali terpukul.",
+    "articleId": "bom_bali_2002",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 5,
+    "headline": "📰 Tragedi Bali — Indonesia berduka"
+  },
+  {
     "id": "tsunami_2004",
     "year": 2004,
     "title": "Tsunami Aceh",
     "category": "disaster",
     "severity": "catastrophic",
     "description": "Gempa dan tsunami dahsyat. Aceh hancur. Seluruh Indonesia berduka.",
+    "articleId": "tsunami_2004",
     "effects": {
       "healthRegional": -0.2,
       "happinessNational": -0.15
@@ -50,12 +150,26 @@
     "headline": "📰 TSUNAMI: Tragedi nasional, ribuan korban"
   },
   {
+    "id": "sby_elected",
+    "year": 2004,
+    "title": "SBY Terpilih Presiden",
+    "category": "political",
+    "severity": "moderate",
+    "description": "Pemilu presiden langsung pertama. Susilo Bambang Yudhoyono menang.",
+    "articleId": "sby_elected",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 5,
+    "headline": "📰 SBY presiden — demokrasi konsolidasi"
+  },
+  {
     "id": "facebook_boom",
     "year": 2008,
     "title": "Era Facebook Indonesia",
     "category": "technology",
     "severity": "moderate",
     "description": "Media sosial masuk Indonesia. Cara remaja bersosialisasi berubah.",
+    "articleId": "facebook_boom",
     "effects": {
       "smartsTech": 0.1,
       "socialChange": 0.2
@@ -71,6 +185,7 @@
     "category": "political",
     "severity": "moderate",
     "description": "Presiden pertama non-elit militer/orde lama. Harapan rakyat jelata.",
+    "articleId": "jokowi_elected",
     "effects": {
       "politicalStability": 0.1,
       "infrastructureBoost": 0.15
@@ -86,6 +201,7 @@
     "category": "economic",
     "severity": "moderate",
     "description": "Gojek dan Grab mengubah transportasi dan lapangan kerja.",
+    "articleId": "ojek_online_boom",
     "effects": {
       "gigEconomyJobs": 0.3,
       "urbanMobility": 0.2
@@ -101,6 +217,8 @@
     "category": "disaster",
     "severity": "catastrophic",
     "description": "Lockdown, sekolah online, PHK masal, UMKM collapse.",
+    "articleId": "covid_2020",
+    "fallbackImage": "assets/images/events/event_covid.png",
     "effects": {
       "nationalWealthModifier": -0.25,
       "healthRisk": 0.3,
@@ -112,12 +230,26 @@
     "headline": "📰 PANDEMI: Indonesia lockdown"
   },
   {
+    "id": "merdeka_belajar",
+    "year": 2020,
+    "title": "Merdeka Belajar",
+    "category": "education",
+    "severity": "moderate",
+    "description": "Kebijakan pendidikan Nadiem Makarim. Kurikulum lebih fleksibel.",
+    "articleId": "merdeka_belajar",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 6,
+    "headline": "📰 Merdeka Belajar — sekolah berubah"
+  },
+  {
     "id": "utbk_reform",
     "year": 2019,
     "title": "Reformasi UTBK/SBMPTN",
     "category": "education",
     "severity": "minor",
     "description": "Sistem masuk PTN makin kompetitif. Generasi muda under pressure.",
+    "articleId": "utbk_reform",
     "effects": {
       "educationPressure": 0.2
     },
@@ -132,6 +264,8 @@
     "category": "economic",
     "severity": "major",
     "description": "Harga BBM naik. Demonstrasi di beberapa kota. Daya beli menurun.",
+    "articleId": "bbm_subsidy_cut",
+    "fallbackImage": "assets/images/events/event_bbm.png",
     "effects": {
       "nationalWealthModifier": -0.1,
       "happinessNational": -0.08
@@ -141,12 +275,26 @@
     "headline": "📰 BBM naik — rakyat protes"
   },
   {
+    "id": "pemilu_2024",
+    "year": 2024,
+    "title": "Pemilu 2024",
+    "category": "political",
+    "severity": "major",
+    "description": "Pemilu serentak terbesar sejarah. Presiden dan legislatif dipilih bersamaan.",
+    "articleId": "pemilu_2024",
+    "effects": {},
+    "phaseForce": null,
+    "minAgeToExperience": 5,
+    "headline": "📰 Pemilu 2024 — suara rakyat menentukan"
+  },
+  {
     "id": "ai_disruption",
     "year": 2025,
     "title": "Revolusi AI",
     "category": "technology",
     "severity": "major",
     "description": "AI menggantikan pekerjaan entry-level. Generasi muda harus adaptasi.",
+    "articleId": "ai_disruption",
     "effects": {
       "jobDisplacement": 0.2,
       "smartsTech": 0.15

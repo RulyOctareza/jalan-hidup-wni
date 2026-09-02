@@ -93,7 +93,11 @@ class LifeSimulator {
     );
     logs.insert(
       0,
-      LifeLogEntry(age: next.age, message: headline),
+      LifeLogEntry(
+        age: next.age,
+        message: headline,
+        type: LifeLogType.news,
+      ),
     );
 
     next = _applyYearlyDrift(next, national);
@@ -103,7 +107,9 @@ class LifeSimulator {
         0,
         LifeLogEntry(
           age: next.age,
-          message: '🔴 ${national.title}: ${national.description}',
+          message: '📜 ${national.title}',
+          articleId: national.effectiveArticleId,
+          type: LifeLogType.history,
         ),
       );
       if (national.phaseForce != null) {
@@ -208,7 +214,11 @@ class LifeSimulator {
     final logs = List<LifeLogEntry>.from(save.log);
     logs.insert(
       0,
-      LifeLogEntry(age: save.age, message: '✓ ${choice.text}'),
+      LifeLogEntry(
+        age: save.age,
+        message: '✓ ${choice.text}',
+        type: LifeLogType.choice,
+      ),
     );
 
     final updated = save.copyWith(

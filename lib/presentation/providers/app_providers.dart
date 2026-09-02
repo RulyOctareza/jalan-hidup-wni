@@ -3,6 +3,7 @@ import 'package:jalan_hidup_wni/data/repositories/life_repository_impl.dart';
 import 'package:jalan_hidup_wni/data/sources/content_source.dart';
 import 'package:jalan_hidup_wni/data/sources/local/life_local_source.dart';
 import 'package:jalan_hidup_wni/domain/entities/game_models.dart';
+import 'package:jalan_hidup_wni/domain/entities/history_article.dart';
 import 'package:jalan_hidup_wni/domain/repositories/life_repository.dart';
 import 'package:jalan_hidup_wni/game_engine/activity_engine.dart';
 import 'package:jalan_hidup_wni/game_engine/event_pool.dart';
@@ -41,6 +42,12 @@ final nationalEventsProvider = FutureProvider<List<NationalEventInfo>>(
 final phasesProvider = FutureProvider<List<PhaseInfo>>((ref) async {
   return ref.watch(contentSourceProvider).getPhases();
 });
+
+final historicalArticlesProvider = FutureProvider<List<HistoryArticle>>(
+  (ref) async {
+    return ref.watch(contentSourceProvider).getHistoricalArticles();
+  },
+);
 
 final hasSaveProvider = FutureProvider<bool>((ref) async {
   return ref.watch(lifeRepositoryProvider).hasSave();

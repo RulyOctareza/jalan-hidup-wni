@@ -7,6 +7,8 @@ import 'package:jalan_hidup_wni/presentation/providers/app_providers.dart';
 import 'package:jalan_hidup_wni/presentation/providers/audio_provider.dart';
 import 'package:jalan_hidup_wni/presentation/providers/life_notifier.dart';
 
+import 'package:jalan_hidup_wni/presentation/widgets/music_toggle_button.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -28,6 +30,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final hasSaveAsync = ref.watch(hasSaveProvider);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: const [MusicToggleButton(), SizedBox(width: 8)],
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [

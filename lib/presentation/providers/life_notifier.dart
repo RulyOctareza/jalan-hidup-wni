@@ -3,6 +3,8 @@ import 'package:jalan_hidup_wni/domain/entities/activity.dart';
 import 'package:jalan_hidup_wni/domain/entities/character.dart';
 import 'package:jalan_hidup_wni/domain/entities/game_models.dart';
 import 'package:jalan_hidup_wni/domain/entities/life_save.dart';
+import 'package:jalan_hidup_wni/domain/entities/history_article.dart';
+import 'package:jalan_hidup_wni/game_engine/history_article_builder.dart';
 import 'package:jalan_hidup_wni/game_engine/history_context.dart';
 import 'package:jalan_hidup_wni/presentation/providers/app_providers.dart';
 import 'package:jalan_hidup_wni/presentation/providers/audio_provider.dart';
@@ -11,6 +13,8 @@ class LifeState {
   const LifeState({
     this.save,
     this.pendingEvent,
+    this.pendingHistoryArticle,
+    this.pendingHistoryFallbackImage,
     this.openingStory,
     this.isLoading = false,
     this.error,
@@ -18,6 +22,8 @@ class LifeState {
 
   final LifeSave? save;
   final GameEvent? pendingEvent;
+  final HistoryArticle? pendingHistoryArticle;
+  final String? pendingHistoryFallbackImage;
   final String? openingStory;
   final bool isLoading;
   final String? error;
@@ -25,14 +31,24 @@ class LifeState {
   LifeState copyWith({
     LifeSave? save,
     GameEvent? pendingEvent,
+    HistoryArticle? pendingHistoryArticle,
+    String? pendingHistoryFallbackImage,
     String? openingStory,
     bool? isLoading,
     String? error,
     bool clearEvent = false,
+    bool clearHistory = false,
   }) =>
       LifeState(
         save: save ?? this.save,
         pendingEvent: clearEvent ? null : (pendingEvent ?? this.pendingEvent),
+        pendingHistoryArticle: clearHistory
+            ? null
+            : (pendingHistoryArticle ?? this.pendingHistoryArticle),
+        pendingHistoryFallbackImage: clearHistory
+            ? null
+            : (pendingHistoryFallbackImage ??
+                this.pendingHistoryFallbackImage),
         openingStory: openingStory ?? this.openingStory,
         isLoading: isLoading ?? this.isLoading,
         error: error,
@@ -130,10 +146,25 @@ class LifeNotifier extends StateNotifier<LifeState> {
         nationalEvents: events,
       );
 
+      HistoryArticle? historyArticle;
+      String? fallbackImage;
+      if (result.nationalEvent != null) {
+        final scraped = await _ref
+            .read(contentSourceProvider)
+            .getArticleById(result.nationalEvent!.effectiveArticleId);
+        historyArticle = articleFromNationalEvent(
+          result.nationalEvent!,
+          scraped: scraped,
+        );
+        fallbackImage = result.nationalEvent!.fallbackImage;
+      }
+
       await _ref.read(lifeRepositoryProvider).saveLife(result.save);
       state = LifeState(
         save: result.save,
         pendingEvent: result.randomEvent,
+        pendingHistoryArticle: historyArticle,
+        pendingHistoryFallbackImage: fallbackImage,
         isLoading: false,
       );
     } catch (e) {
@@ -159,6 +190,10 @@ class LifeNotifier extends StateNotifier<LifeState> {
     }
 
     state = state.copyWith(save: updated, clearEvent: true);
+  }
+
+  void dismissHistoryArticle() {
+    state = state.copyWith(clearHistory: true);
   }
 
   void dismissEvent() {

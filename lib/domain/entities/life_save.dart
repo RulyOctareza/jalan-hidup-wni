@@ -1,18 +1,40 @@
 import 'package:jalan_hidup_wni/domain/entities/character.dart';
 
 class LifeLogEntry {
-  const LifeLogEntry({required this.age, required this.message});
+  const LifeLogEntry({
+    required this.age,
+    required this.message,
+    this.articleId,
+    this.type = LifeLogType.general,
+  });
 
   final int age;
   final String message;
+  final String? articleId;
+  final LifeLogType type;
 
-  Map<String, dynamic> toJson() => {'age': age, 'message': message};
+  bool get isHistorical =>
+      type == LifeLogType.history || articleId != null;
+
+  Map<String, dynamic> toJson() => {
+        'age': age,
+        'message': message,
+        if (articleId != null) 'articleId': articleId,
+        if (type != LifeLogType.general) 'type': type.name,
+      };
 
   factory LifeLogEntry.fromJson(Map<String, dynamic> json) => LifeLogEntry(
         age: json['age'] as int,
         message: json['message'] as String,
+        articleId: json['articleId'] as String?,
+        type: LifeLogType.values.firstWhere(
+          (t) => t.name == json['type'],
+          orElse: () => LifeLogType.general,
+        ),
       );
 }
+
+enum LifeLogType { general, news, history, activity, choice }
 
 class LifeSave {
   const LifeSave({

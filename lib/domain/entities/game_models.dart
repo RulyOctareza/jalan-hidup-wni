@@ -63,6 +63,8 @@ class NationalEventInfo {
     required this.headline,
     required this.description,
     this.phaseForce,
+    this.articleId,
+    this.fallbackImage,
   });
 
   final String id;
@@ -71,6 +73,10 @@ class NationalEventInfo {
   final String headline;
   final String description;
   final String? phaseForce;
+  final String? articleId;
+  final String? fallbackImage;
+
+  String get effectiveArticleId => articleId ?? id;
 
   factory NationalEventInfo.fromJson(Map<String, dynamic> json) =>
       NationalEventInfo(
@@ -80,6 +86,8 @@ class NationalEventInfo {
         headline: json['headline'] as String? ?? '',
         description: json['description'] as String,
         phaseForce: json['phaseForce'] as String?,
+        articleId: json['articleId'] as String?,
+        fallbackImage: json['fallbackImage'] as String?,
       );
 }
 

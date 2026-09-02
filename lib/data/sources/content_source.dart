@@ -2,12 +2,33 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:jalan_hidup_wni/domain/entities/game_models.dart';
+import 'package:jalan_hidup_wni/domain/entities/history_article.dart';
 
 class ContentSource {
   List<PresidentInfo>? _presidents;
   List<EraInfo>? _eras;
   List<NationalEventInfo>? _nationalEvents;
   List<PhaseInfo>? _phases;
+  List<HistoryArticle>? _historicalArticles;
+
+  Future<List<HistoryArticle>> getHistoricalArticles() async {
+    if (_historicalArticles != null) return _historicalArticles!;
+    final raw = await rootBundle.loadString(
+      'assets/content/history/historical_articles.json',
+    );
+    _historicalArticles = (jsonDecode(raw) as List<dynamic>)
+        .map((e) => HistoryArticle.fromJson(e as Map<String, dynamic>))
+        .toList();
+    return _historicalArticles!;
+  }
+
+  Future<HistoryArticle?> getArticleById(String id) async {
+    final articles = await getHistoricalArticles();
+    for (final a in articles) {
+      if (a.id == id) return a;
+    }
+    return null;
+  }
 
   Future<List<PresidentInfo>> getPresidents() async {
     if (_presidents != null) return _presidents!;
