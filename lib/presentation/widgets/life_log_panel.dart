@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jalan_hidup_wni/core/theme/app_colors.dart';
+import 'package:jalan_hidup_wni/core/theme/app_motion.dart';
 import 'package:jalan_hidup_wni/domain/entities/game_models.dart';
 import 'package:jalan_hidup_wni/domain/entities/life_save.dart';
 import 'package:jalan_hidup_wni/game_engine/history_article_builder.dart';
@@ -18,16 +19,29 @@ class LifeLogPanel extends ConsumerWidget {
       return const SizedBox.shrink();
     }
 
+    final visible = log.take(12).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            const Icon(Icons.history, size: 18, color: AppColors.primary),
-            const SizedBox(width: 6),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.history_rounded,
+                size: 16,
+                color: AppColors.primary,
+              ),
+            ),
+            const SizedBox(width: 8),
             const Text(
               'Riwayat',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
             ),
             const Spacer(),
             Text(
@@ -41,24 +55,38 @@ class LifeLogPanel extends ConsumerWidget {
           'Ketuk 📜 untuk baca sejarah lengkap',
           style: TextStyle(fontSize: 10, color: AppColors.textMuted),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         SizedBox(
-          height: 130,
+          height: 138,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: log.take(12).length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            itemCount: visible.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
             itemBuilder: (context, index) {
-              final entry = log[index];
+              final entry = visible[index];
               final accent = _accentFor(entry);
-              return _LogChip(
-                age: entry.age,
-                message: entry.message,
-                accent: accent,
-                tappable: entry.isHistorical,
-                onTap: entry.articleId == null
-                    ? null
-                    : () => _openArticle(context, ref, entry.articleId!),
+              return TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0, end: 1),
+                duration: Duration(milliseconds: 320 + index * 45),
+                curve: AppMotion.easeOut,
+                builder: (context, t, child) {
+                  return Opacity(
+                    opacity: t,
+                    child: Transform.translate(
+                      offset: Offset((1 - t) * 18, 0),
+                      child: child,
+                    ),
+                  );
+                },
+                child: _LogChip(
+                  age: entry.age,
+                  message: entry.message,
+                  accent: accent,
+                  tappable: entry.isHistorical,
+                  onTap: entry.articleId == null
+                      ? null
+                      : () => _openArticle(context, ref, entry.articleId!),
+                ),
               );
             },
           ),
@@ -69,7 +97,7 @@ class LifeLogPanel extends ConsumerWidget {
 
   Color _accentFor(LifeLogEntry entry) {
     if (entry.type == LifeLogType.history || entry.message.startsWith('📜')) {
-      return AppColors.gold;
+      return AppColors.goldDeep;
     }
     if (entry.type == LifeLogType.news || entry.message.startsWith('📰')) {
       return AppColors.blue;
@@ -114,7 +142,7 @@ class LifeLogPanel extends ConsumerWidget {
   }
 }
 
-class _LogChip extends StatelessWidget {
+class _LogChip extends StatefulWidget {
   const _LogChip({
     required this.age,
     required this.message,
@@ -130,72 +158,87 @@ class _LogChip extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
+  State<_LogChip> createState() => _LogChipState();
+}
+
+class _LogChipState extends State<_LogChip> {
+  bool _pressed = false;
+
+  @override
   Widget build(BuildContext context) {
-    final chip = Container(
-      width: 220,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: accent.withValues(alpha: tappable ? 0.45 : 0.25),
-          width: tappable ? 1.5 : 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: accent.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 3),
+    final chip = AnimatedScale(
+      scale: _pressed ? 0.96 : 1,
+      duration: AppMotion.instant,
+      child: AnimatedContainer(
+        duration: AppMotion.fast,
+        width: 224,
+        padding: const EdgeInsets.all(13),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: widget.accent.withValues(alpha: widget.tappable ? 0.5 : 0.22),
+            width: widget.tappable ? 1.5 : 1,
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: accent.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Usia $age',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: accent,
+          boxShadow: AppColors.softShadow(color: widget.accent),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: widget.accent.withValues(alpha: 0.14),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Usia ${widget.age}',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      color: widget.accent,
+                    ),
                   ),
                 ),
-              ),
-              if (tappable) ...[
-                const Spacer(),
-                Icon(Icons.menu_book_outlined, size: 14, color: accent),
+                if (widget.tappable) ...[
+                  const Spacer(),
+                  Icon(
+                    Icons.menu_book_rounded,
+                    size: 15,
+                    color: widget.accent,
+                  ),
+                ],
               ],
-            ],
-          ),
-          const SizedBox(height: 6),
-          Expanded(
-            child: Text(
-              message,
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 11.5, height: 1.3),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Expanded(
+              child: Text(
+                widget.message,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 11.5,
+                  height: 1.35,
+                  color: AppColors.textDark,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
 
-    if (onTap == null) return chip;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
-        child: chip,
-      ),
+    if (widget.onTap == null) return chip;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _pressed = true),
+      onTapUp: (_) => setState(() => _pressed = false),
+      onTapCancel: () => setState(() => _pressed = false),
+      onTap: widget.onTap,
+      child: chip,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jalan_hidup_wni/core/constants/asset_paths.dart';
 import 'package:jalan_hidup_wni/core/theme/app_colors.dart';
+import 'package:jalan_hidup_wni/core/theme/app_motion.dart';
 import 'package:jalan_hidup_wni/presentation/providers/app_providers.dart';
 import 'package:jalan_hidup_wni/presentation/providers/audio_provider.dart';
 import 'package:jalan_hidup_wni/presentation/providers/life_notifier.dart';
@@ -23,18 +24,35 @@ class LifeScreen extends ConsumerStatefulWidget {
 }
 
 class _LifeScreenState extends ConsumerState<LifeScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _agePulse;
+  late AnimationController _contentIn;
+  late Animation<double> _ageScale;
 
   @override
   void initState() {
     super.initState();
     _agePulse = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
-      lowerBound: 0.95,
-      upperBound: 1.05,
+      duration: const Duration(milliseconds: 520),
     );
+    _ageScale = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1, end: 1.08)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 40,
+      ),
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1.08, end: 1)
+            .chain(CurveTween(curve: Curves.elasticOut)),
+        weight: 60,
+      ),
+    ]).animate(_agePulse);
+
+    _contentIn = AnimationController(
+      vsync: this,
+      duration: AppMotion.slow,
+    )..forward();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final state = ref.read(lifeNotifierProvider);
@@ -52,24 +70,49 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
   @override
   void dispose() {
     _agePulse.dispose();
+    _contentIn.dispose();
     super.dispose();
   }
 
   void _showOpeningIfNeeded() {
     final opening = ref.read(lifeNotifierProvider).openingStory;
     if (opening != null && mounted) {
-      showDialog<void>(
+      showGeneralDialog<void>(
         context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Awal Perjalanan'),
-          content: Text(opening),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('Mulai'),
+        barrierDismissible: true,
+        barrierLabel: 'opening',
+        barrierColor: Colors.black54,
+        transitionDuration: AppMotion.normal,
+        pageBuilder: (ctx, _, __) => const SizedBox.shrink(),
+        transitionBuilder: (ctx, anim, _, __) {
+          return FadeTransition(
+            opacity: anim,
+            child: ScaleTransition(
+              scale: Tween<double>(begin: 0.92, end: 1).animate(
+                CurvedAnimation(parent: anim, curve: AppMotion.softBounce),
+              ),
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22),
+                ),
+                title: const Row(
+                  children: [
+                    Icon(Icons.auto_stories_rounded, color: AppColors.primary),
+                    SizedBox(width: 8),
+                    Text('Awal Perjalanan'),
+                  ],
+                ),
+                content: Text(opening, style: const TextStyle(height: 1.45)),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    child: const Text('Mulai'),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       );
     }
   }
@@ -195,7 +238,10 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
     return Scaffold(
       backgroundColor: AppColors.cream,
       appBar: AppBar(
-        title: Text(save.character.name),
+        title: Text(
+          save.character.name,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
         actions: const [
           MusicToggleButton(),
           SizedBox(width: 4),
@@ -207,8 +253,7 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
             save: save,
             avatarKey: avatarKey,
             phaseName: phaseName,
-            avatarBuilder: (key) => ClipRRect(
-              borderRadius: BorderRadius.circular(36),
+            avatarBuilder: (key) => ClipOval(
               child: Image.asset(
                 AssetPaths.avatar(key),
                 width: 64,
@@ -216,44 +261,66 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => CircleAvatar(
                   radius: 32,
-                  child: Text('${save.age}'),
+                  backgroundColor: AppColors.primarySoft,
+                  child: Text(
+                    '${save.age}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  AnimatedEnergyBar(
-                    energy: save.energy,
-                    maxEnergy: save.maxEnergy,
-                  ),
-                  if (!save.hasEnergyLeft) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      'Energi habis — waktunya menua?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.primary.withValues(alpha: 0.85),
-                        fontStyle: FontStyle.italic,
-                      ),
+            child: FadeTransition(
+              opacity: CurvedAnimation(
+                parent: _contentIn,
+                curve: AppMotion.easeOut,
+              ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AnimatedEnergyBar(
+                      energy: save.energy,
+                      maxEnergy: save.maxEnergy,
                     ),
+                    AnimatedSize(
+                      duration: AppMotion.normal,
+                      curve: AppMotion.easeOut,
+                      child: !save.hasEnergyLeft
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(
+                                'Energi habis — waktunya menua?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.9,
+                                  ),
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: 16),
+                    StatGrid(
+                      happiness: save.happiness,
+                      health: save.health,
+                      smarts: save.smarts,
+                      looks: save.looks,
+                      wealthLabel: _formatRupiah(save.wealth),
+                    ),
+                    const SizedBox(height: 18),
+                    LifeLogPanel(log: save.log),
                   ],
-                  const SizedBox(height: 14),
-                  StatGrid(
-                    happiness: save.happiness,
-                    health: save.health,
-                    smarts: save.smarts,
-                    looks: save.looks,
-                    wealthLabel: _formatRupiah(save.wealth),
-                  ),
-                  const SizedBox(height: 16),
-                  LifeLogPanel(log: save.log),
-                ],
+                ),
               ),
             ),
           ),
@@ -263,27 +330,29 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
           ? null
           : SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                padding: const EdgeInsets.fromLTRB(16, 6, 16, 12),
                 child: ScaleTransition(
-                  scale: _agePulse,
+                  scale: _ageScale,
                   child: Row(
                     children: [
                       Expanded(
                         flex: 2,
-                        child: ElevatedButton.icon(
+                        child: _ActionButton(
                           onPressed: save.isAlive
                               ? () => ActivityMenuSheet.show(context, save)
                               : null,
-                          icon: const Icon(Icons.grid_view_rounded),
-                          label: const Text('Aktivitas'),
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
+                          icon: Icons.grid_view_rounded,
+                          label: 'Aktivitas',
+                          gradient: const [
+                            AppColors.primarySoft,
+                            AppColors.primary,
+                          ],
+                          foreground: Colors.white,
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: ElevatedButton(
+                        child: _ActionButton(
                           onPressed: save.isAlive
                               ? () async {
                                   await ref
@@ -294,12 +363,12 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
                                       .ageUp();
                                 }
                               : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.gold,
-                            foregroundColor: AppColors.textDark,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text('+1 Th'),
+                          label: '+1 Th',
+                          gradient: const [
+                            AppColors.gold,
+                            AppColors.goldDeep,
+                          ],
+                          foreground: AppColors.textDark,
                         ),
                       ),
                     ],
@@ -307,6 +376,67 @@ class _LifeScreenState extends ConsumerState<LifeScreen>
                 ),
               ),
             ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  const _ActionButton({
+    required this.label,
+    required this.gradient,
+    required this.foreground,
+    this.icon,
+    this.onPressed,
+  });
+
+  final String label;
+  final List<Color> gradient;
+  final Color foreground;
+  final IconData? icon;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = onPressed != null;
+    return AnimatedOpacity(
+      duration: AppMotion.fast,
+      opacity: enabled ? 1 : 0.5,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(colors: gradient),
+          boxShadow: enabled
+              ? AppColors.glowShadow(gradient.last)
+              : const [],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onPressed,
+            borderRadius: BorderRadius.circular(16),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (icon != null) ...[
+                    Icon(icon, color: foreground, size: 20),
+                    const SizedBox(width: 8),
+                  ],
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: foreground,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
