@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/preview/hero.png" alt="Jalan Hidup WNI — ilustrasi life simulator Indonesia" width="100%">
+  <img src="docs/preview/hero.svg" alt="Jalan Hidup WNI — ilustrasi life simulator Indonesia" width="100%">
 </p>
 
 <h1 align="center">Jalan Hidup WNI</h1>
